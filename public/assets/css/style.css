@@ -1011,6 +1011,9 @@ body {
     font-weight: 500;
     margin-top: 12px;
     transition: all 0.3s ease;
+    align-self: flex-start;
+    width: auto;
+    max-width: fit-content;
 }
 
 .whatsapp-btn:hover {
