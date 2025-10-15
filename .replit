@@ -26,7 +26,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "php -S 0.0.0.0:5000 -t public -d upload_max_filesize=10M -d post_max_size=12M -d max_execution_time=60"
+args = "php -S 0.0.0.0:5000 -t public"
 waitForPort = 5000
 
 [[ports]]
@@ -34,7 +34,7 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 34071
+localPort = 33541
 externalPort = 3000
 
 [[ports]]
