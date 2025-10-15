@@ -10,9 +10,15 @@ class AmharicMatrixRain {
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
         
-        this.amharicNumbers = ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲'];
+        // Amharic numbers and some common Amharic letters
+        this.amharicChars = [
+            '፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲',
+            'ሀ', 'ለ', 'ሐ', 'መ', 'ሠ', 'ረ', 'ሰ', 'ሸ', 'ቀ', 'በ',
+            'ተ', 'ቸ', 'ኀ', 'ነ', 'ኘ', 'አ', 'ከ', 'ኸ', 'ወ', 'ዐ',
+            'ዘ', 'ዠ', 'የ', 'ደ', 'ጀ', 'ገ', 'ጠ', 'ጨ', 'ጰ', 'ፀ'
+        ];
         
-        this.fontSize = 16;
+        this.fontSize = 18;
         this.speed = 0.4; // Slower falling speed (was 1, now 0.4)
         this.columns = this.canvas.width / this.fontSize;
         this.drops = [];
@@ -40,10 +46,10 @@ class AmharicMatrixRain {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.ctx.fillStyle = '#00FF41';
-        this.ctx.font = this.fontSize + 'px monospace';
+        this.ctx.font = this.fontSize + 'px "Noto Sans Ethiopic", "Nyala", "Ethiopia Jiret", sans-serif';
         
         for (let i = 0; i < this.drops.length; i++) {
-            const text = this.amharicNumbers[Math.floor(Math.random() * this.amharicNumbers.length)];
+            const text = this.amharicChars[Math.floor(Math.random() * this.amharicChars.length)];
             this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             
             if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {

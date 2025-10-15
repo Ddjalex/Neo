@@ -57,7 +57,8 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - Accent colors for status badges and alerts
 
 ## Matrix Effect
-- **Animation**: Amharic falling code effect (Amharic numbers: ፩፪፫፬፭፮፯፰፱፲)
+- **Animation**: Amharic falling code effect with numbers (፩፪፫፬፭፮፯፰፱፲) and letters (ሀለሐመሠረሰሸቀበተቸኀነኘአከኸወዐዘዠየደጀገጠጨጰፀ)
+- **Font**: Noto Sans Ethiopic for proper Amharic character rendering
 - **Locations**: Hero/page-header sections and footer on all pages
 - **Styling**: Green (#00FF41) with 50% opacity for subtle appearance
 - **Speed**: Slower falling animation (0.4 speed) for elegant effect
@@ -79,6 +80,9 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - October 15, 2025: Social media links added to footer with security attributes
 - October 15, 2025: Footer resized for compact appearance
 - October 15, 2025: Matrix animation speed reduced for elegant effect
+- October 15, 2025: Services section updated with horizontal scroll navigation
+- October 15, 2025: Amharic matrix characters enhanced with proper font (Noto Sans Ethiopic) and expanded character set (numbers + letters)
+- October 15, 2025: Database imported and fully configured with PostgreSQL
 - Database: PostgreSQL with 4 tables and sample data
 - All CRUD operations functional
 - Responsive design with mobile support

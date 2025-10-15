@@ -141,9 +141,30 @@ body {
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
     gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.services-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.services-grid::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.services-grid::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+.services-grid::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gold);
 }
 
 .service-card {
@@ -152,6 +173,8 @@ body {
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s;
+    min-width: 280px;
+    flex-shrink: 0;
 }
 
 .service-card:hover {
