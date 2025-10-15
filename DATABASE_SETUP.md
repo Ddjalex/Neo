@@ -44,4 +44,15 @@ Your NEO Printing and Advertising website requires a PostgreSQL database to func
 - **Username**: admin
 - **Password**: admin123
 
+## WhatsApp Configuration:
+To change the WhatsApp business number:
+1. Open `config/settings.php`
+2. Update the `$whatsapp_number` value (format: country code + number, e.g., 251911234567)
+3. The WhatsApp request buttons on each service will automatically use this number
+
+## Features:
+- **WhatsApp Integration**: Each service has a "Request via WhatsApp" button that opens WhatsApp with a pre-filled message
+- **Portfolio Image Uploads**: Upload portfolio images through the admin panel (stored in `/public/assets/uploads/portfolio/`)
+- **Contact Form**: Customers can submit inquiries which are saved to the database
+
 Once the database is set up, your website will be fully functional!
