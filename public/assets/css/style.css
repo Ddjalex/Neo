@@ -23,6 +23,7 @@ body {
     line-height: 1.6;
     color: var(--black);
     background: var(--white);
+    padding-top: 70px;
 }
 
 .container {
@@ -34,9 +35,20 @@ body {
 .navbar {
     background: var(--dark-bg);
     padding: 1rem 0;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 40;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
+}
+
+.navbar.visible {
+    transform: translateY(0);
 }
 
 .navbar .container {
