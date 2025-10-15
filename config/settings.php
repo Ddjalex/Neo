@@ -21,6 +21,33 @@ class Settings {
         return $number ?: '251911234567'; // Default fallback
     }
     
+    // Get Telegram link from database, fallback to default
+    public static function getTelegramLink() {
+        $model = self::getSettingsModel();
+        $link = $model->get('telegram_link');
+        return $link ?: 'https://t.me/neoprinting';
+    }
+    
+    // Get Facebook link from database, fallback to default
+    public static function getFacebookLink() {
+        $model = self::getSettingsModel();
+        $link = $model->get('facebook_link');
+        return $link ?: 'https://facebook.com/neoprinting';
+    }
+    
+    // Get Instagram link from database, fallback to default
+    public static function getInstagramLink() {
+        $model = self::getSettingsModel();
+        $link = $model->get('instagram_link');
+        return $link ?: 'https://instagram.com/neoprinting';
+    }
+    
+    // Get WhatsApp link from database
+    public static function getWhatsAppSocialLink() {
+        $number = self::getWhatsAppNumber();
+        return 'https://wa.me/' . $number;
+    }
+    
     // WhatsApp Business Number (format: country code + number without + or spaces)
     // This is now stored in database, use Settings::getWhatsAppNumber()
     public static $whatsapp_number = '251911234567'; // Kept for backwards compatibility
@@ -29,7 +56,7 @@ class Settings {
     public static $company_name = 'NEO Printing and Advertising';
     public static $company_email = 'info@neoprinting.com';
     
-    // Social Media Links
+    // Social Media Links (kept for backwards compatibility)
     public static $telegram = 'https://t.me/neoprinting';
     public static $facebook = 'https://facebook.com/neoprinting';
     public static $instagram = 'https://instagram.com/neoprinting';
