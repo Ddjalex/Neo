@@ -714,7 +714,7 @@ body {
     }
 }
 
-/* Matrix Animation Background - Green effect in header only */
+/* Matrix Animation Background - Green effect in navbar only */
 #matrix-canvas {
     position: fixed;
     top: 0;
@@ -726,14 +726,14 @@ body {
     pointer-events: none;
     mask-image: linear-gradient(to bottom, 
         rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 200px, 
-        rgba(0,0,0,0) 350px,
+        rgba(0,0,0,1) 70px, 
+        rgba(0,0,0,0) 90px,
         rgba(0,0,0,0) 100%
     );
     -webkit-mask-image: linear-gradient(to bottom, 
         rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 200px, 
-        rgba(0,0,0,0) 350px,
+        rgba(0,0,0,1) 70px, 
+        rgba(0,0,0,0) 90px,
         rgba(0,0,0,0) 100%
     );
 }
