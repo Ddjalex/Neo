@@ -766,9 +766,23 @@ body {
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
+    .navbar .container {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
+    }
+    
+    .nav-menu {
+        flex-direction: row;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-menu a {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
     
     .hero h1 {
@@ -975,15 +989,15 @@ body {
 .whatsapp-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: #25D366;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 14px;
     border-radius: 5px;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    margin-top: 15px;
+    margin-top: 12px;
     transition: all 0.3s ease;
 }
 
@@ -994,7 +1008,7 @@ body {
 }
 
 .whatsapp-btn i {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .service-item {
