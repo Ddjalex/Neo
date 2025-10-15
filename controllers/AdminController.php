@@ -20,6 +20,7 @@ require_once __DIR__ . '/../models/Service.php';
 require_once __DIR__ . '/../models/Portfolio.php';
 require_once __DIR__ . '/../models/ContactLead.php';
 require_once __DIR__ . '/../models/SiteSettings.php';
+require_once __DIR__ . '/../models/BlogPost.php';
 
 class AdminController {
     
@@ -313,34 +314,215 @@ class AdminController {
         $this->checkAuth();
         
         $settingsModel = new SiteSettings();
-        $whatsapp_number = $settingsModel->get('whatsapp_number') ?: '251911234567';
+        $settings = $settingsModel->getAllAsArray();
         $csrf_token = $this->generateCSRFToken();
-        $message = '';
-        $message_type = '';
+        $flash = $this->getFlashMessage();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->validateCSRFToken();
             
-            $new_whatsapp = trim($_POST['whatsapp_number'] ?? '');
+            $action = $_POST['action'] ?? '';
             
-            if (empty($new_whatsapp)) {
-                $message = 'WhatsApp number cannot be empty';
-                $message_type = 'error';
-            } elseif (!preg_match('/^[0-9]{10,15}$/', $new_whatsapp)) {
-                $message = 'Please enter a valid WhatsApp number (10-15 digits, no spaces or special characters)';
-                $message_type = 'error';
-            } else {
-                if ($settingsModel->set('whatsapp_number', $new_whatsapp)) {
-                    $whatsapp_number = $new_whatsapp;
-                    $message = 'WhatsApp number updated successfully!';
-                    $message_type = 'success';
+            if ($action === 'update_settings') {
+                $updates = [
+                    'whatsapp_number' => trim($_POST['whatsapp_number'] ?? ''),
+                    'contact_email' => trim($_POST['contact_email'] ?? ''),
+                    'contact_phone' => trim($_POST['contact_phone'] ?? ''),
+                    'contact_address' => trim($_POST['contact_address'] ?? ''),
+                    'company_name' => trim($_POST['company_name'] ?? '')
+                ];
+                
+                if ($settingsModel->updateMultiple($updates)) {
+                    $this->redirect('/admin/settings', 'Settings updated successfully!', 'success');
                 } else {
-                    $message = 'Failed to update WhatsApp number';
-                    $message_type = 'error';
+                    $this->redirect('/admin/settings', 'Failed to update settings', 'error');
+                }
+            } elseif ($action === 'change_password') {
+                $current_password = $_POST['current_password'] ?? '';
+                $new_password = $_POST['new_password'] ?? '';
+                $confirm_password = $_POST['confirm_password'] ?? '';
+                
+                if ($new_password !== $confirm_password) {
+                    $this->redirect('/admin/settings', 'New passwords do not match', 'error');
+                }
+                
+                $adminModel = new AdminUser();
+                $user = $adminModel->getById($_SESSION['admin_id']);
+                
+                if (!password_verify($current_password, $user['password_hash'])) {
+                    $this->redirect('/admin/settings', 'Current password is incorrect', 'error');
+                }
+                
+                if ($adminModel->updatePassword($_SESSION['admin_id'], $new_password)) {
+                    $this->redirect('/admin/settings', 'Password changed successfully!', 'success');
+                } else {
+                    $this->redirect('/admin/settings', 'Failed to change password', 'error');
                 }
             }
         }
         
         require __DIR__ . '/../views/admin/settings.php';
+    }
+    
+    public function blog() {
+        $this->checkAuth();
+        
+        $blogModel = new BlogPost();
+        $posts = $blogModel->getAll('all');
+        $csrf_token = $this->generateCSRFToken();
+        $flash = $this->getFlashMessage();
+        
+        require __DIR__ . '/../views/admin/blog.php';
+    }
+    
+    public function blogCreate() {
+        $this->checkAuth();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $csrf_token = $this->generateCSRFToken();
+            require __DIR__ . '/../views/admin/blog_form.php';
+            return;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
+            $title = $_POST['title'] ?? '';
+            $content = $_POST['content'] ?? '';
+            $excerpt = $_POST['excerpt'] ?? '';
+            $status = $_POST['status'] ?? 'draft';
+            $author = $_SESSION['admin_username'] ?? 'Admin';
+            
+            $blogModel = new BlogPost();
+            $slug = $blogModel->generateSlug($title);
+            
+            $featured_image = '';
+            if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = __DIR__ . '/../public/assets/uploads/blog/';
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                $file_extension = pathinfo($_FILES['featured_image']['name'], PATHINFO_EXTENSION);
+                $file_name = uniqid() . '.' . $file_extension;
+                $upload_path = $upload_dir . $file_name;
+                
+                if (move_uploaded_file($_FILES['featured_image']['tmp_name'], $upload_path)) {
+                    $featured_image = '/assets/uploads/blog/' . $file_name;
+                }
+            }
+            
+            $data = [
+                'title' => $title,
+                'slug' => $slug,
+                'content' => $content,
+                'excerpt' => $excerpt,
+                'featured_image' => $featured_image,
+                'author' => $author,
+                'status' => $status
+            ];
+            
+            $blogModel->create($data);
+            $this->redirect('/admin/blog', 'Blog post created successfully!', 'success');
+        }
+    }
+    
+    public function blogEdit() {
+        $this->checkAuth();
+        
+        $id = intval($_GET['id'] ?? 0);
+        $blogModel = new BlogPost();
+        $post = $blogModel->getById($id);
+        
+        if (!$post) {
+            $this->redirect('/admin/blog', 'Blog post not found', 'error');
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $csrf_token = $this->generateCSRFToken();
+            require __DIR__ . '/../views/admin/blog_form.php';
+            return;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
+            $title = $_POST['title'] ?? '';
+            $content = $_POST['content'] ?? '';
+            $excerpt = $_POST['excerpt'] ?? '';
+            $status = $_POST['status'] ?? 'draft';
+            
+            $slug = $blogModel->generateSlug($title);
+            $featured_image = $post['featured_image'];
+            
+            if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = __DIR__ . '/../public/assets/uploads/blog/';
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                $file_extension = pathinfo($_FILES['featured_image']['name'], PATHINFO_EXTENSION);
+                $file_name = uniqid() . '.' . $file_extension;
+                $upload_path = $upload_dir . $file_name;
+                
+                if (move_uploaded_file($_FILES['featured_image']['tmp_name'], $upload_path)) {
+                    if ($featured_image && file_exists(__DIR__ . '/../public' . $featured_image)) {
+                        unlink(__DIR__ . '/../public' . $featured_image);
+                    }
+                    $featured_image = '/assets/uploads/blog/' . $file_name;
+                }
+            }
+            
+            $data = [
+                'title' => $title,
+                'slug' => $slug,
+                'content' => $content,
+                'excerpt' => $excerpt,
+                'featured_image' => $featured_image,
+                'author' => $post['author'],
+                'status' => $status,
+                'published_at' => $post['published_at']
+            ];
+            
+            $blogModel->update($id, $data);
+            $this->redirect('/admin/blog', 'Blog post updated successfully!', 'success');
+        }
+    }
+    
+    public function blogDelete() {
+        $this->checkAuth();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
+            $id = intval($_POST['id'] ?? 0);
+            
+            $blogModel = new BlogPost();
+            $blogModel->delete($id);
+            
+            $this->redirect('/admin/blog', 'Blog post deleted successfully!', 'success');
+        }
+    }
+    
+    public function about() {
+        $this->checkAuth();
+        
+        $settingsModel = new SiteSettings();
+        $about_title = $settingsModel->get('about_title') ?: 'About Us';
+        $about_content = $settingsModel->get('about_content') ?: '';
+        $csrf_token = $this->generateCSRFToken();
+        $flash = $this->getFlashMessage();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
+            $title = $_POST['about_title'] ?? '';
+            $content = $_POST['about_content'] ?? '';
+            
+            $settingsModel->set('about_title', $title);
+            $settingsModel->set('about_content', $content);
+            
+            $this->redirect('/admin/about', 'About page updated successfully!', 'success');
+        }
+        
+        require __DIR__ . '/../views/admin/about.php';
     }
 }

@@ -22,4 +22,10 @@ class AdminUser {
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+    
+    public function updatePassword($id, $new_password) {
+        $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare("UPDATE admin_users SET password_hash = ? WHERE id = ?");
+        return $stmt->execute([$password_hash, $id]);
+    }
 }
