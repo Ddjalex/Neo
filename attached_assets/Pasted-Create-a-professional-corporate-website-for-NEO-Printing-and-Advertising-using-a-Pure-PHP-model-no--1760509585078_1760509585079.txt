@@ -1,0 +1,59 @@
+Create a professional corporate website for NEO Printing and Advertising using a Pure PHP model (no external CMS like WordPress). The project must include a fully functional, secure Admin Dashboard.
+
+Technology Stack: PHP, HTML, CSS, JavaScript, MySQL (for database).
+
+Design: Modern, professional, and fully responsive. Integrate the provided Hummingbird Logo (gold/tan) prominently.
+
+2. Required Features and Content
+The website must showcase all company services clearly.
+
+A. Public-Facing Pages
+Home Page: Introduction, clear CTA, and brief overview sections for the main service categories.
+
+Services Page: Detail all services:
+
+
+Advertising: Social Media Ads (Facebook, Instagram, TikTok), Google Ads.
+
+
+Management: Social Media Management, Google Maps Listing.
+
+
+Creative: Video Production, Graphics Design, Logo Design, Branding, VR Solutions.
+
+
+Tech: Website Development, Digital Business Cards.
+
+
+Outreach: SMS Advertising, Email Marketing.
+
+Portfolio Page: Showcase completed projects with details.
+
+Contact Page: Secure form to capture leads (submissions must save to the database).
+
+B. Admin Dashboard
+The dashboard must allow non-developers to manage content.
+
+Secure Login: Only authorized admins can access.
+
+Content Management (CMS): CRUD (Create, Read, Update, Delete) functionality for:
+
+Services: Manage titles and descriptions for all services listed above.
+
+Portfolio: Upload, edit, and delete project entries (images and text).
+
+Lead Management: View and manage submissions from the Contact Form.
+
+3. Database Schema Requirement
+Set up the MySQL database with at least the following tables:
+
+admin_users (for secure login)
+
+services (to store service titles and descriptions)
+
+portfolio (to store project details)
+
+contact_leads (to store form submissions)
+
+4. Final Output Focus
+Prioritize clean, well-structured PHP code adhering to good MVC (Model-View-Controller) principles where feasible for clarity and scalability.
