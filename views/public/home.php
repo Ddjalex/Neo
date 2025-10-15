@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -24,6 +23,7 @@
     </nav>
 
     <section class="hero">
+        <canvas id="matrix-canvas"></canvas>
         <div class="container">
             <div class="hero-content">
                 <h1>Transform Your Brand with <span class="highlight">Digital Excellence</span></h1>

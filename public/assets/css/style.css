@@ -73,7 +73,7 @@ body {
     padding: 100px 0;
     text-align: center;
     position: relative;
-    z-index: 5;
+    overflow: hidden;
 }
 
 .hero h1 {
@@ -204,6 +204,8 @@ body {
     color: var(--white);
     padding: 60px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .page-header h1 {
@@ -716,28 +718,14 @@ body {
 
 /* Matrix Animation Background - Green effect in navbar only */
 #matrix-canvas {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 50;
-    opacity: 0.4;
+    height: 350px;
+    z-index: 1;
+    opacity: 0.5;
     pointer-events: none;
-    mask-image: linear-gradient(to bottom, 
-        rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 280px, 
-        rgba(0,0,0,0.3) 300px,
-        rgba(0,0,0,0) 320px,
-        rgba(0,0,0,0) 100%
-    );
-    -webkit-mask-image: linear-gradient(to bottom, 
-        rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 280px, 
-        rgba(0,0,0,0.3) 300px,
-        rgba(0,0,0,0) 320px,
-        rgba(0,0,0,0) 100%
-    );
 }
 
 /* Splash Screen / Startup Animation */

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -24,6 +23,7 @@
     </nav>
 
     <section class="page-header">
+        <canvas id="matrix-canvas"></canvas>
         <div class="container">
             <h1>Our Portfolio</h1>
             <p>Showcasing our latest projects and success stories</p>
