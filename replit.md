@@ -56,8 +56,29 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - Dark backgrounds: #1a1a1a, #0a0a0a
 - Accent colors for status badges and alerts
 
+## Matrix Effect
+- **Animation**: Amharic falling code effect (Amharic numbers: ፩፪፫፬፭፮፯፰፱፲)
+- **Locations**: Hero/page-header sections and footer on all pages
+- **Styling**: Green (#00FF41) with 50% opacity for subtle appearance
+- **Speed**: Slower falling animation (0.4 speed) for elegant effect
+- **Containment**: Confined to specific sections with overflow:hidden
+
+## Footer
+- **Matrix Effect**: Same Amharic falling code as hero sections
+- **Social Media Links**: 
+  - Telegram: https://t.me/neoprinting
+  - WhatsApp: https://wa.me/251911234567
+  - Facebook: https://facebook.com/neoprinting
+  - Instagram: https://instagram.com/neoprinting
+- **Styling**: Compact design with gold circular icons and hover effects
+- **Security**: External links use rel="noopener noreferrer"
+
 ## Recent Changes
 - October 15, 2025: Initial project setup with complete feature set
+- October 15, 2025: Matrix effect added to hero and footer sections (Amharic falling code)
+- October 15, 2025: Social media links added to footer with security attributes
+- October 15, 2025: Footer resized for compact appearance
+- October 15, 2025: Matrix animation speed reduced for elegant effect
 - Database: PostgreSQL with 4 tables and sample data
 - All CRUD operations functional
 - Responsive design with mobile support
