@@ -10,13 +10,16 @@ class MatrixRain {
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
         
-        // Matrix characters - numbers and symbols
+        // Matrix characters - Amharic Geez numbers and characters
         this.matrixChars = [
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-            'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-            'U', 'V', 'W', 'X', 'Y', 'Z', '@', '#', '$', '%',
-            '^', '&', '*', '(', ')', '-', '+', '=', '[', ']'
+            // Geez numbers (1-10)
+            '፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲',
+            // Amharic Geez characters
+            'ሀ', 'ለ', 'ሐ', 'መ', 'ሠ', 'ረ', 'ሰ', 'ሸ', 'ቀ', 'በ',
+            'ተ', 'ቸ', 'ኀ', 'ነ', 'ኘ', 'አ', 'ከ', 'ኸ', 'ወ', 'ዐ',
+            'ዘ', 'ዠ', 'የ', 'ደ', 'ጀ', 'ገ', 'ጠ', 'ጨ', 'ጰ', 'ጸ',
+            'ፀ', 'ፈ', 'ፐ', 'ሁ', 'ሊ', 'ሒ', 'ሜ', 'ሤ', 'ሪ', 'ሲ',
+            'ሺ', 'ቂ', 'ቢ', 'ቲ', 'ቺ', 'ኂ', 'ኒ', 'ኚ', 'እ', 'ኪ'
         ];
         
         this.fontSize = 18;
