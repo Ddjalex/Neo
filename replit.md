@@ -29,22 +29,28 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 ## Features
 
 ### Public-Facing Website
-- **Home Page**: Hero section, service overview, CTAs
-- **Services Page**: All service categories (Advertising, Management, Creative, Tech, Outreach)
+- **Home Page**: Hero section, service overview, CTAs, recent blog posts
+- **Services Page**: All service categories with WhatsApp request buttons for each service
 - **Portfolio Page**: Project showcase with images and descriptions
 - **Contact Page**: Form with database storage
+- **Blog Pages**: Blog listing and individual post pages
+- **About Page**: Company information (editable via admin)
 
 ### Admin Dashboard
 - **Secure Login**: Session-based authentication (default: admin/admin123)
 - **Service Management**: CRUD operations for all services
 - **Portfolio Management**: Upload/edit/delete projects with image handling
 - **Lead Management**: View and manage contact form submissions
+- **Blog Management**: Create, edit, and publish blog posts
+- **Settings Management**: Configure contact information and social media links (Telegram, Facebook, Instagram, WhatsApp)
 
 ## Database Schema
 - `admin_users`: Admin authentication
 - `services`: Service catalog with categories
 - `portfolio`: Project showcase
 - `contact_leads`: Contact form submissions
+- `blog_posts`: Blog posts and articles
+- `site_settings`: Configurable site settings (contact info, social media links, etc.)
 
 ## Admin Access
 - **URL**: `/admin/login`
@@ -66,13 +72,18 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 
 ## Footer
 - **Matrix Effect**: Same Amharic falling code as hero sections
-- **Social Media Links**: 
-  - Telegram: https://t.me/neoprinting
-  - WhatsApp: https://wa.me/251911234567
-  - Facebook: https://facebook.com/neoprinting
-  - Instagram: https://instagram.com/neoprinting
+- **Social Media Links**: Dynamically loaded from database settings
+  - Telegram (configurable via admin)
+  - WhatsApp (configurable via admin)
+  - Facebook (configurable via admin)
+  - Instagram (configurable via admin)
 - **Styling**: Compact design with gold circular icons and hover effects
 - **Security**: External links use rel="noopener noreferrer"
+
+## WhatsApp Integration
+- **Service Inquiries**: Each service has a "Request via WhatsApp" button
+- **Pre-filled Messages**: WhatsApp links include the service name (e.g., "Hello! I'm interested in Graphic Design service. Can you provide more information?")
+- **Dynamic Phone Number**: WhatsApp number managed through admin settings panel
 
 ## Recent Changes
 - October 15, 2025: Initial project setup with complete feature set
@@ -82,8 +93,10 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - October 15, 2025: Matrix animation speed reduced for elegant effect
 - October 15, 2025: Services section updated with horizontal scroll navigation
 - October 15, 2025: Amharic matrix characters enhanced with proper font (Noto Sans Ethiopic) and expanded character set (numbers + letters)
-- October 15, 2025: Database imported and fully configured with PostgreSQL
-- Database: PostgreSQL with 4 tables and sample data
+- October 15, 2025: Database imported and fully configured with PostgreSQL (6 tables)
+- October 15, 2025: Added social media link management to admin settings panel
+- October 15, 2025: Implemented dynamic social media links in footer (loads from database)
+- October 15, 2025: Enhanced WhatsApp integration with service-specific pre-filled messages
 - All CRUD operations functional
 - Responsive design with mobile support
 
