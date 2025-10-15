@@ -21,9 +21,9 @@ class NEOLoader {
                 const splash = document.getElementById('splash-screen');
                 if (splash) {
                     splash.classList.add('fade-out');
-                    setTimeout(() => splash.remove(), 500);
+                    setTimeout(() => splash.remove(), 300);
                 }
-            }, 1500);
+            }, 400);
         });
     }
     
