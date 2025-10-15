@@ -18,7 +18,10 @@
             </div>
             <?php endif; ?>
             
-            <form method="POST" action="/admin/login">
+            <form method="POST" action="/admin/login<?php echo isset($_GET['ADMIN_SESSION']) ? '?ADMIN_SESSION=' . htmlspecialchars($_GET['ADMIN_SESSION']) : ''; ?>">
+                <?php if (isset($_GET['ADMIN_SESSION'])): ?>
+                <input type="hidden" name="ADMIN_SESSION" value="<?php echo htmlspecialchars($_GET['ADMIN_SESSION']); ?>">
+                <?php endif; ?>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required autofocus>

@@ -1,9 +1,18 @@
 <?php
-session_start([
-    'cookie_httponly' => true,
-    'cookie_secure' => isset($_SERVER['HTTPS']),
-    'cookie_samesite' => 'Strict'
-]);
+// Configure session to work in iframe/proxy environments
+ini_set('session.use_cookies', '1');
+ini_set('session.use_only_cookies', '0');
+ini_set('session.use_trans_sid', '1');
+ini_set('session.cookie_samesite', '');
+session_name('ADMIN_SESSION');
+
+if (isset($_GET['ADMIN_SESSION']) && !empty($_GET['ADMIN_SESSION'])) {
+    session_id($_GET['ADMIN_SESSION']);
+} elseif (isset($_POST['ADMIN_SESSION']) && !empty($_POST['ADMIN_SESSION'])) {
+    session_id($_POST['ADMIN_SESSION']);
+}
+
+session_start();
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/AdminUser.php';
@@ -13,10 +22,17 @@ require_once __DIR__ . '/../models/ContactLead.php';
 
 class AdminController {
     
+    private function redirect($url) {
+        $sessionId = session_id();
+        $separator = (strpos($url, '?') !== false) ? '&' : '?';
+        $url = $url . $separator . 'ADMIN_SESSION=' . $sessionId;
+        header('Location: ' . $url);
+        exit;
+    }
+    
     private function checkAuth() {
         if (!isset($_SESSION['admin_id'])) {
-            header('Location: /admin/login');
-            exit;
+            $this->redirect('/admin/login');
         }
     }
     
@@ -38,8 +54,7 @@ class AdminController {
     
     public function login() {
         if (isset($_SESSION['admin_id'])) {
-            header('Location: /admin/dashboard');
-            exit;
+            $this->redirect('/admin/dashboard');
         }
         
         $error = '';
@@ -55,8 +70,7 @@ class AdminController {
                 session_regenerate_id(true);
                 $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['admin_username'] = $user['username'];
-                header('Location: /admin/dashboard');
-                exit;
+                $this->redirect('/admin/dashboard');
             } else {
                 $error = 'Invalid username or password';
             }
@@ -67,8 +81,7 @@ class AdminController {
     
     public function logout() {
         session_destroy();
-        header('Location: /admin/login');
-        exit;
+        $this->redirect('/admin/login');
     }
     
     public function dashboard() {
@@ -112,8 +125,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->create($category, $title, $description, $order_position);
             
-            header('Location: /admin/services');
-            exit;
+            $this->redirect('/admin/services');
         }
     }
     
@@ -132,8 +144,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->update($id, $category, $title, $description, $order_position);
             
-            header('Location: /admin/services');
-            exit;
+            $this->redirect('/admin/services');
         }
     }
     
@@ -148,8 +159,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->delete($id);
             
-            header('Location: /admin/services');
-            exit;
+            $this->redirect('/admin/services');
         }
     }
     
@@ -188,8 +198,7 @@ class AdminController {
             $portfolioModel = new Portfolio();
             $portfolioModel->create($title, $description, $image_path, $category);
             
-            header('Location: /admin/portfolio');
-            exit;
+            $this->redirect('/admin/portfolio');
         }
     }
     
@@ -224,8 +233,7 @@ class AdminController {
             
             $portfolioModel->update($id, $title, $description, $image_path, $category);
             
-            header('Location: /admin/portfolio');
-            exit;
+            $this->redirect('/admin/portfolio');
         }
     }
     
@@ -240,8 +248,7 @@ class AdminController {
             $portfolioModel = new Portfolio();
             $portfolioModel->delete($id);
             
-            header('Location: /admin/portfolio');
-            exit;
+            $this->redirect('/admin/portfolio');
         }
     }
     
@@ -267,8 +274,7 @@ class AdminController {
             $contactModel = new ContactLead();
             $contactModel->updateStatus($id, $status);
             
-            header('Location: /admin/leads');
-            exit;
+            $this->redirect('/admin/leads');
         }
     }
     
@@ -283,8 +289,7 @@ class AdminController {
             $contactModel = new ContactLead();
             $contactModel->delete($id);
             
-            header('Location: /admin/leads');
-            exit;
+            $this->redirect('/admin/leads');
         }
     }
 }
