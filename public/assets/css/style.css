@@ -991,7 +991,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #25D366;
+    background: #4A6A8A;
     color: white;
     padding: 8px 14px;
     border-radius: 5px;
@@ -1006,9 +1006,9 @@ body {
 }
 
 .whatsapp-btn:hover {
-    background: #20BA5A;
+    background: #3A5A7A;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 12px rgba(74, 106, 138, 0.3);
 }
 
 .whatsapp-btn i {
