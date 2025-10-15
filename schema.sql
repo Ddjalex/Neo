@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS contact_leads (
 -- Insert default admin user (username: admin, password: admin123)
 -- Password hash generated with PHP password_hash('admin123', PASSWORD_DEFAULT)
 INSERT INTO admin_users (username, password_hash) 
-VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi')
+VALUES ('admin', '$2y$10$RIu8YvzC2nP/gmTfJWTmw.2bZCMhGMdvuTGxh3xvcADzNBBcHGmVW')
 ON CONFLICT (username) DO NOTHING;
 
 -- Insert sample services
