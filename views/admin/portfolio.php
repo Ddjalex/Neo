@@ -1,3 +1,4 @@
+<?php $sessionParam = '?ADMIN_SESSION=' . session_id(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +15,19 @@
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard" class="nav-item">
+                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services" class="nav-item">
+                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio" class="nav-item active">
+                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item active">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/leads" class="nav-item">
+                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/logout" class="nav-item">
+                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
@@ -57,8 +58,9 @@
                             <button class="btn-icon" onclick='editProject(<?php echo json_encode($project); ?>)'>
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <form method="POST" action="/admin/portfolio/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                            <form method="POST" action="/admin/portfolio/delete<?php echo $sessionParam; ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
                                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                                <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                                 <input type="hidden" name="id" value="<?php echo $project['id']; ?>">
                                 <button type="submit" class="btn-icon btn-danger">
                                     <i class="fas fa-trash"></i>
@@ -76,8 +78,9 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('addProjectModal')">&times;</span>
             <h2>Add New Project</h2>
-            <form method="POST" action="/admin/portfolio/create" enctype="multipart/form-data">
+            <form method="POST" action="/admin/portfolio/create<?php echo $sessionParam; ?>" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" name="title" required>
@@ -103,8 +106,9 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('editProjectModal')">&times;</span>
             <h2>Edit Project</h2>
-            <form method="POST" action="/admin/portfolio/update" enctype="multipart/form-data">
+            <form method="POST" action="/admin/portfolio/update<?php echo $sessionParam; ?>" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <input type="hidden" name="id" id="edit_project_id">
                 <div class="form-group">
                     <label>Title</label>

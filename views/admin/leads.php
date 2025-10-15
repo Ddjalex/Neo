@@ -1,3 +1,4 @@
+<?php $sessionParam = '?ADMIN_SESSION=' . session_id(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +15,19 @@
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard" class="nav-item">
+                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services" class="nav-item">
+                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio" class="nav-item">
+                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/leads" class="nav-item active">
+                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item active">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/logout" class="nav-item">
+                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
@@ -67,8 +68,9 @@
                                 <button class="btn-icon" onclick='viewLead(<?php echo json_encode($lead); ?>)'>
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <form method="POST" action="/admin/leads/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                <form method="POST" action="/admin/leads/delete<?php echo $sessionParam; ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
                                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                                    <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                                     <input type="hidden" name="id" value="<?php echo $lead['id']; ?>">
                                     <button type="submit" class="btn-icon btn-danger">
                                         <i class="fas fa-trash"></i>
@@ -95,8 +97,9 @@
                 <p><strong>Message:</strong></p>
                 <p id="view_message" class="message-text"></p>
                 
-                <form method="POST" action="/admin/leads/update-status">
+                <form method="POST" action="/admin/leads/update-status<?php echo $sessionParam; ?>">
                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                    <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                     <input type="hidden" name="id" id="lead_id">
                     <div class="form-group">
                         <label>Update Status</label>

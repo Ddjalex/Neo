@@ -1,3 +1,4 @@
+<?php $sessionParam = '?ADMIN_SESSION=' . session_id(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +15,19 @@
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard" class="nav-item">
+                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services" class="nav-item active">
+                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item active">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio" class="nav-item">
+                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/leads" class="nav-item">
+                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/logout" class="nav-item">
+                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
@@ -62,8 +63,9 @@
                                 <button class="btn-icon" onclick='editService(<?php echo json_encode($service); ?>)'>
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <form method="POST" action="/admin/services/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                <form method="POST" action="/admin/services/delete<?php echo $sessionParam; ?>" style="display:inline;" onsubmit="return confirm('Are you sure?')">
                                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                                    <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                                     <input type="hidden" name="id" value="<?php echo $service['id']; ?>">
                                     <button type="submit" class="btn-icon btn-danger">
                                         <i class="fas fa-trash"></i>
@@ -82,8 +84,9 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('addServiceModal')">&times;</span>
             <h2>Add New Service</h2>
-            <form method="POST" action="/admin/services/create">
+            <form method="POST" action="/admin/services/create<?php echo $sessionParam; ?>">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <div class="form-group">
                     <label>Category</label>
                     <select name="category" required>
@@ -113,8 +116,9 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('editServiceModal')">&times;</span>
             <h2>Edit Service</h2>
-            <form method="POST" action="/admin/services/update" id="editServiceForm">
+            <form method="POST" action="/admin/services/update<?php echo $sessionParam; ?>" id="editServiceForm">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="form-group">
                     <label>Category</label>
