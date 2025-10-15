@@ -65,18 +65,30 @@ class Settings {
     public static $instagram = 'https://instagram.com/neoprinting';
     
     /**
-     * Generate WhatsApp link with pre-filled message
+     * Generate WhatsApp link with pre-filled message including website URL
      * @param string $service_name The name of the service
      * @return string WhatsApp URL
      */
     public static function getWhatsAppLink($service_name = '') {
+        // Get website URL - prioritize Replit domain over HTTP_HOST to avoid localhost
+        $domain = getenv('REPLIT_DEV_DOMAIN') ?: ($_SERVER['HTTP_HOST'] ?? 'neoprinting.com');
+        $websiteUrl = 'https://' . $domain;
+        
         $message = "Hello! I'm interested in ";
         if (!empty($service_name)) {
-            $message .= $service_name . " service";
+            $message .= $service_name . " service from NEO Printing and Advertising";
         } else {
-            $message .= "your services";
+            $message .= "your services from NEO Printing and Advertising";
         }
-        $message .= ". Can you provide more information?";
+        $message .= ". Can you provide more information?\n\n";
+        
+        // Add service link
+        if (!empty($service_name)) {
+            $serviceSlug = strtolower(str_replace(' ', '-', $service_name));
+            $message .= "Service link: " . $websiteUrl . "/services#" . $serviceSlug;
+        } else {
+            $message .= "Website: " . $websiteUrl;
+        }
         
         return 'https://wa.me/' . self::getWhatsAppNumber() . '?text=' . urlencode($message);
     }
