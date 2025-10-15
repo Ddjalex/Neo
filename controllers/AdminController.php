@@ -19,6 +19,7 @@ require_once __DIR__ . '/../models/AdminUser.php';
 require_once __DIR__ . '/../models/Service.php';
 require_once __DIR__ . '/../models/Portfolio.php';
 require_once __DIR__ . '/../models/ContactLead.php';
+require_once __DIR__ . '/../models/SiteSettings.php';
 
 class AdminController {
     
@@ -291,5 +292,41 @@ class AdminController {
             
             $this->redirect('/admin/leads');
         }
+    }
+}
+    
+    public function settings() {
+        $this->checkAuth();
+        
+        $settingsModel = new SiteSettings();
+        $whatsapp_number = $settingsModel->get('whatsapp_number') ?: '251911234567';
+        $csrf_token = $this->generateCSRFToken();
+        $message = '';
+        $message_type = '';
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
+            $new_whatsapp = trim($_POST['whatsapp_number'] ?? '');
+            
+            if (empty($new_whatsapp)) {
+                $message = 'WhatsApp number cannot be empty';
+                $message_type = 'error';
+            } elseif (!preg_match('/^[0-9]{10,15}$/', $new_whatsapp)) {
+                $message = 'Please enter a valid WhatsApp number (10-15 digits, no spaces or special characters)';
+                $message_type = 'error';
+            } else {
+                if ($settingsModel->set('whatsapp_number', $new_whatsapp)) {
+                    $whatsapp_number = $new_whatsapp;
+                    $message = 'WhatsApp number updated successfully!';
+                    $message_type = 'success';
+                } else {
+                    $message = 'Failed to update WhatsApp number';
+                    $message_type = 'error';
+                }
+            }
+        }
+        
+        require __DIR__ . '/../views/admin/settings.php';
     }
 }

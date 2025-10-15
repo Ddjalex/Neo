@@ -1001,3 +1001,120 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+/* Settings Page Styles */
+.settings-container {
+    display: grid;
+    gap: 2rem;
+    max-width: 1000px;
+}
+
+.settings-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.settings-card h2 {
+    color: var(--black);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.settings-card h2 i {
+    color: var(--gold);
+}
+
+.settings-description {
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+}
+
+.settings-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.label-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    color: #25D366;
+    font-size: 1.2rem;
+}
+
+.input-with-icon input {
+    padding-left: 45px;
+}
+
+.form-hint {
+    display: block;
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.form-preview {
+    background: var(--gray);
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1.5rem 0;
+}
+
+.form-preview p {
+    margin: 0.5rem 0;
+}
+
+.preview-note {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.instructions h3 {
+    color: var(--black);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.instructions ol, .instructions ul {
+    margin-left: 1.5rem;
+    color: var(--text-gray);
+}
+
+.instructions li {
+    margin-bottom: 0.5rem;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

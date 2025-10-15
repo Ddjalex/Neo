@@ -1,0 +1,30 @@
+<?php
+class SiteSettings {
+    private $db;
+    
+    public function __construct() {
+        $this->db = Database::getInstance()->getConnection();
+    }
+    
+    public function get($key) {
+        $stmt = $this->db->prepare("SELECT setting_value FROM site_settings WHERE setting_key = ?");
+        $stmt->execute([$key]);
+        $result = $stmt->fetch();
+        return $result ? $result['setting_value'] : null;
+    }
+    
+    public function set($key, $value) {
+        $stmt = $this->db->prepare("
+            INSERT INTO site_settings (setting_key, setting_value, updated_at) 
+            VALUES (?, ?, CURRENT_TIMESTAMP)
+            ON CONFLICT (setting_key) 
+            DO UPDATE SET setting_value = EXCLUDED.setting_value, updated_at = CURRENT_TIMESTAMP
+        ");
+        return $stmt->execute([$key, $value]);
+    }
+    
+    public function getAll() {
+        $stmt = $this->db->query("SELECT * FROM site_settings ORDER BY setting_key");
+        return $stmt->fetchAll();
+    }
+}

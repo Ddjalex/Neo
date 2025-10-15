@@ -87,6 +87,10 @@ switch ($request_path) {
         $adminController->leadDelete();
         break;
         
+    case '/admin/settings':
+        $adminController->settings();
+        break;
+        
     default:
         http_response_code(404);
         echo '404 - Page Not Found';

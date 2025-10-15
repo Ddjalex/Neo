@@ -27,6 +27,9 @@
                 <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
+                <a href="/admin/settings<?php echo $sessionParam; ?>" class="nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
                 <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
