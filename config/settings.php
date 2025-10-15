@@ -14,37 +14,40 @@ class Settings {
         return self::$settingsModel;
     }
     
-    // Get WhatsApp number from database, fallback to default
+    // Get WhatsApp number from database
     public static function getWhatsAppNumber() {
         $model = self::getSettingsModel();
         $number = $model->get('whatsapp_number');
-        return $number ?: '251911234567'; // Default fallback
+        return $number ?: '';
     }
     
-    // Get Telegram link from database, fallback to default
+    // Get Telegram link from database
     public static function getTelegramLink() {
         $model = self::getSettingsModel();
         $link = $model->get('telegram_link');
-        return $link ?: 'https://t.me/neoprinting';
+        return $link ?: '#';
     }
     
-    // Get Facebook link from database, fallback to default
+    // Get Facebook link from database
     public static function getFacebookLink() {
         $model = self::getSettingsModel();
         $link = $model->get('facebook_link');
-        return $link ?: 'https://facebook.com/neoprinting';
+        return $link ?: '#';
     }
     
-    // Get Instagram link from database, fallback to default
+    // Get Instagram link from database
     public static function getInstagramLink() {
         $model = self::getSettingsModel();
         $link = $model->get('instagram_link');
-        return $link ?: 'https://instagram.com/neoprinting';
+        return $link ?: '#';
     }
     
     // Get WhatsApp link from database
     public static function getWhatsAppSocialLink() {
         $number = self::getWhatsAppNumber();
+        if (empty($number)) {
+            return '#';
+        }
         return 'https://wa.me/' . $number;
     }
     
