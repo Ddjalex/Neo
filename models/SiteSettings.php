@@ -27,4 +27,30 @@ class SiteSettings {
         $stmt = $this->db->query("SELECT * FROM site_settings ORDER BY setting_key");
         return $stmt->fetchAll();
     }
+    
+    public function getAllAsArray() {
+        $stmt = $this->db->query("SELECT * FROM site_settings ORDER BY setting_key ASC");
+        $results = $stmt->fetchAll();
+        
+        // Convert to associative array
+        $settings = [];
+        foreach ($results as $row) {
+            $settings[$row['setting_key']] = $row['setting_value'];
+        }
+        return $settings;
+    }
+    
+    public function updateMultiple($settings) {
+        $this->db->beginTransaction();
+        try {
+            foreach ($settings as $key => $value) {
+                $this->set($key, $value);
+            }
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
 }
