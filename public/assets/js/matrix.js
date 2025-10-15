@@ -1,4 +1,4 @@
-class AmharicMatrixRain {
+class MatrixRain {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         if (!this.canvas) return;
@@ -10,16 +10,17 @@ class AmharicMatrixRain {
         this.canvas.width = parent.offsetWidth;
         this.canvas.height = parent.offsetHeight;
         
-        // Amharic numbers and some common Amharic letters
-        this.amharicChars = [
-            '፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲',
-            'ሀ', 'ለ', 'ሐ', 'መ', 'ሠ', 'ረ', 'ሰ', 'ሸ', 'ቀ', 'በ',
-            'ተ', 'ቸ', 'ኀ', 'ነ', 'ኘ', 'አ', 'ከ', 'ኸ', 'ወ', 'ዐ',
-            'ዘ', 'ዠ', 'የ', 'ደ', 'ጀ', 'ገ', 'ጠ', 'ጨ', 'ጰ', 'ፀ'
+        // Matrix characters - numbers and symbols
+        this.matrixChars = [
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+            'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+            'U', 'V', 'W', 'X', 'Y', 'Z', '@', '#', '$', '%',
+            '^', '&', '*', '(', ')', '-', '+', '=', '[', ']'
         ];
         
         this.fontSize = 18;
-        this.speed = 0.4;
+        this.speed = 0.8;
         this.columns = this.canvas.width / this.fontSize;
         this.drops = [];
         
@@ -46,10 +47,10 @@ class AmharicMatrixRain {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         this.ctx.fillStyle = '#00FF41';
-        this.ctx.font = this.fontSize + 'px "Noto Sans Ethiopic", "Nyala", "Ethiopia Jiret", sans-serif';
+        this.ctx.font = this.fontSize + 'px monospace';
         
         for (let i = 0; i < this.drops.length; i++) {
-            const text = this.amharicChars[Math.floor(Math.random() * this.amharicChars.length)];
+            const text = this.matrixChars[Math.floor(Math.random() * this.matrixChars.length)];
             this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
             
             if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
@@ -67,9 +68,9 @@ class AmharicMatrixRain {
 
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('matrix-canvas')) {
-        new AmharicMatrixRain('matrix-canvas');
+        new MatrixRain('matrix-canvas');
     }
     if (document.getElementById('footer-matrix-canvas')) {
-        new AmharicMatrixRain('footer-matrix-canvas');
+        new MatrixRain('footer-matrix-canvas');
     }
 });
