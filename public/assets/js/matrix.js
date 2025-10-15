@@ -19,7 +19,7 @@ class AmharicMatrixRain {
         ];
         
         this.fontSize = 18;
-        this.speed = 0.4;
+        this.speed = 0.2; // Slower falling speed
         this.columns = this.canvas.width / this.fontSize;
         this.drops = [];
         
