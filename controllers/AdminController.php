@@ -293,7 +293,6 @@ class AdminController {
             $this->redirect('/admin/leads');
         }
     }
-}
     
     public function settings() {
         $this->checkAuth();
