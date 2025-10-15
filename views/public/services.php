@@ -43,6 +43,12 @@
                     <div class="service-item">
                         <h3><?php echo htmlspecialchars($service['title']); ?></h3>
                         <p><?php echo htmlspecialchars($service['description']); ?></p>
+                        <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
+                           class="whatsapp-btn" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> Request via WhatsApp
+                        </a>
                     </div>
                     <?php endforeach; ?>
                 </div>
