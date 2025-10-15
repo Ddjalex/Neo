@@ -1,15 +1,19 @@
 class AmharicMatrixRain {
-    constructor() {
-        this.canvas = document.getElementById('matrix-canvas');
+    constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
         if (!this.canvas) return;
         
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        
+        // Get the parent section's dimensions
+        const parent = this.canvas.parentElement;
+        this.canvas.width = parent.offsetWidth;
+        this.canvas.height = parent.offsetHeight;
         
         this.amharicNumbers = ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲'];
         
         this.fontSize = 16;
+        this.speed = 0.4; // Slower falling speed (was 1, now 0.4)
         this.columns = this.canvas.width / this.fontSize;
         this.drops = [];
         
@@ -20,8 +24,9 @@ class AmharicMatrixRain {
         this.animate();
         
         window.addEventListener('resize', () => {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
+            const parent = this.canvas.parentElement;
+            this.canvas.width = parent.offsetWidth;
+            this.canvas.height = parent.offsetHeight;
             this.columns = this.canvas.width / this.fontSize;
             this.drops = [];
             for (let i = 0; i < this.columns; i++) {
@@ -44,7 +49,7 @@ class AmharicMatrixRain {
             if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
                 this.drops[i] = 0;
             }
-            this.drops[i]++;
+            this.drops[i] += this.speed;
         }
     }
     
@@ -56,6 +61,9 @@ class AmharicMatrixRain {
 
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('matrix-canvas')) {
-        new AmharicMatrixRain();
+        new AmharicMatrixRain('matrix-canvas');
+    }
+    if (document.getElementById('footer-matrix-canvas')) {
+        new AmharicMatrixRain('footer-matrix-canvas');
     }
 });
