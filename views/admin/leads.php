@@ -68,6 +68,7 @@
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <form method="POST" action="/admin/leads/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                     <input type="hidden" name="id" value="<?php echo $lead['id']; ?>">
                                     <button type="submit" class="btn-icon btn-danger">
                                         <i class="fas fa-trash"></i>
@@ -95,6 +96,7 @@
                 <p id="view_message" class="message-text"></p>
                 
                 <form method="POST" action="/admin/leads/update-status">
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                     <input type="hidden" name="id" id="lead_id">
                     <div class="form-group">
                         <label>Update Status</label>

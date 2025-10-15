@@ -63,6 +63,7 @@
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <form method="POST" action="/admin/services/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                     <input type="hidden" name="id" value="<?php echo $service['id']; ?>">
                                     <button type="submit" class="btn-icon btn-danger">
                                         <i class="fas fa-trash"></i>
@@ -82,6 +83,7 @@
             <span class="close" onclick="closeModal('addServiceModal')">&times;</span>
             <h2>Add New Service</h2>
             <form method="POST" action="/admin/services/create">
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <div class="form-group">
                     <label>Category</label>
                     <select name="category" required>
@@ -112,6 +114,7 @@
             <span class="close" onclick="closeModal('editServiceModal')">&times;</span>
             <h2>Edit Service</h2>
             <form method="POST" action="/admin/services/update" id="editServiceForm">
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <input type="hidden" name="id" id="edit_id">
                 <div class="form-group">
                     <label>Category</label>

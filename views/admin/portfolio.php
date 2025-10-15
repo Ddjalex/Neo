@@ -58,6 +58,7 @@
                                 <i class="fas fa-edit"></i>
                             </button>
                             <form method="POST" action="/admin/portfolio/delete" style="display:inline;" onsubmit="return confirm('Are you sure?')">
+                                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                 <input type="hidden" name="id" value="<?php echo $project['id']; ?>">
                                 <button type="submit" class="btn-icon btn-danger">
                                     <i class="fas fa-trash"></i>
@@ -76,6 +77,7 @@
             <span class="close" onclick="closeModal('addProjectModal')">&times;</span>
             <h2>Add New Project</h2>
             <form method="POST" action="/admin/portfolio/create" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" name="title" required>
@@ -102,6 +104,7 @@
             <span class="close" onclick="closeModal('editProjectModal')">&times;</span>
             <h2>Edit Project</h2>
             <form method="POST" action="/admin/portfolio/update" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <input type="hidden" name="id" id="edit_project_id">
                 <div class="form-group">
                     <label>Title</label>

@@ -1,5 +1,9 @@
 <?php
-session_start();
+session_start([
+    'cookie_httponly' => true,
+    'cookie_secure' => isset($_SERVER['HTTPS']),
+    'cookie_samesite' => 'Strict'
+]);
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/AdminUser.php';
@@ -13,6 +17,22 @@ class AdminController {
         if (!isset($_SESSION['admin_id'])) {
             header('Location: /admin/login');
             exit;
+        }
+    }
+    
+    private function generateCSRFToken() {
+        if (!isset($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+    
+    private function validateCSRFToken() {
+        if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token'])) {
+            die('CSRF validation failed');
+        }
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+            die('CSRF validation failed');
         }
     }
     
@@ -32,6 +52,7 @@ class AdminController {
             $user = $adminModel->authenticate($username, $password);
             
             if ($user) {
+                session_regenerate_id(true);
                 $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['admin_username'] = $user['username'];
                 header('Location: /admin/dashboard');
@@ -61,6 +82,8 @@ class AdminController {
         $total_projects = count($portfolioModel->getAll());
         $total_leads = count($contactModel->getAll());
         
+        $csrf_token = $this->generateCSRFToken();
+        
         require __DIR__ . '/../views/admin/dashboard.php';
     }
     
@@ -70,6 +93,7 @@ class AdminController {
         $serviceModel = new Service();
         $services = $serviceModel->getAll();
         $categories = ['Advertising', 'Management', 'Creative', 'Tech', 'Outreach'];
+        $csrf_token = $this->generateCSRFToken();
         
         require __DIR__ . '/../views/admin/services.php';
     }
@@ -78,6 +102,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $category = $_POST['category'] ?? '';
             $title = $_POST['title'] ?? '';
             $description = $_POST['description'] ?? '';
@@ -95,6 +121,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             $category = $_POST['category'] ?? '';
             $title = $_POST['title'] ?? '';
@@ -113,6 +141,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             
             $serviceModel = new Service();
@@ -128,6 +158,7 @@ class AdminController {
         
         $portfolioModel = new Portfolio();
         $projects = $portfolioModel->getAll();
+        $csrf_token = $this->generateCSRFToken();
         
         require __DIR__ . '/../views/admin/portfolio.php';
     }
@@ -136,6 +167,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $title = $_POST['title'] ?? '';
             $description = $_POST['description'] ?? '';
             $category = $_POST['category'] ?? '';
@@ -164,6 +197,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             $title = $_POST['title'] ?? '';
             $description = $_POST['description'] ?? '';
@@ -198,6 +233,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             
             $portfolioModel = new Portfolio();
@@ -213,6 +250,7 @@ class AdminController {
         
         $contactModel = new ContactLead();
         $leads = $contactModel->getAll();
+        $csrf_token = $this->generateCSRFToken();
         
         require __DIR__ . '/../views/admin/leads.php';
     }
@@ -221,6 +259,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             $status = $_POST['status'] ?? 'new';
             
@@ -236,6 +276,8 @@ class AdminController {
         $this->checkAuth();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->validateCSRFToken();
+            
             $id = intval($_POST['id'] ?? 0);
             
             $contactModel = new ContactLead();

@@ -4,19 +4,15 @@ class Database {
     private $conn;
     
     private function __construct() {
-        $database_url = getenv('DATABASE_URL');
+        $host = getenv('PGHOST');
+        $port = getenv('PGPORT');
+        $dbname = getenv('PGDATABASE');
+        $user = getenv('PGUSER');
+        $password = getenv('PGPASSWORD');
         
-        if (!$database_url) {
-            throw new Exception('DATABASE_URL environment variable not set');
+        if (!$host || !$port || !$dbname || !$user || !$password) {
+            throw new Exception('Database environment variables not set');
         }
-        
-        $url = parse_url($database_url);
-        
-        $host = $url['host'];
-        $port = $url['port'];
-        $dbname = ltrim($url['path'], '/');
-        $user = $url['user'];
-        $password = $url['pass'];
         
         try {
             $this->conn = new PDO(

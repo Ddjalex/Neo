@@ -1,0 +1,13 @@
+.cache/
+.local/
+*.log
+.replit
+public/assets/uploads/*
+!public/assets/uploads/portfolio/.gitkeep
+vendor/
+composer.lock
+.env
+*.swp
+*.swo
+*~
+.DS_Store
