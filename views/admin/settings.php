@@ -24,6 +24,12 @@
                 <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
+                <a href="/admin/blog<?php echo $sessionParam; ?>" class="nav-item">
+                    <i class="fas fa-blog"></i> Blog
+                </a>
+                <a href="/admin/about<?php echo $sessionParam; ?>" class="nav-item">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
                 <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
@@ -41,68 +47,82 @@
                 <h1>Site Settings</h1>
             </div>
             
-            <?php if (!empty($message)): ?>
-            <div class="alert alert-<?php echo $message_type; ?>">
-                <?php echo htmlspecialchars($message); ?>
+            <?php if (!empty($flash['message'])): ?>
+            <div class="alert alert-<?php echo $flash['type']; ?>">
+                <?php echo htmlspecialchars($flash['message']); ?>
             </div>
             <?php endif; ?>
             
             <div class="settings-container">
                 <div class="settings-card">
-                    <h2><i class="fab fa-whatsapp"></i> WhatsApp Configuration</h2>
-                    <p class="settings-description">Configure the WhatsApp business number that will be used for service requests on the public website.</p>
-                    
+                    <h2><i class="fas fa-address-book"></i> Contact Information</h2>
                     <form method="POST" action="/admin/settings<?php echo $sessionParam; ?>" class="settings-form">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                         <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
+                        <input type="hidden" name="action" value="update_settings">
                         
                         <div class="form-group">
-                            <label for="whatsapp_number">
-                                WhatsApp Number
-                                <span class="label-hint">(Format: Country code + number, e.g., 251911234567 for +251 911 234 567)</span>
-                            </label>
-                            <div class="input-with-icon">
-                                <i class="fab fa-whatsapp"></i>
-                                <input type="text" 
-                                       id="whatsapp_number" 
-                                       name="whatsapp_number" 
-                                       value="<?php echo htmlspecialchars($whatsapp_number); ?>" 
-                                       placeholder="251911234567"
-                                       pattern="[0-9]{10,15}"
-                                       required>
-                            </div>
-                            <small class="form-hint">Enter only numbers (10-15 digits). No spaces, dashes, or special characters.</small>
+                            <label for="company_name">Company Name</label>
+                            <input type="text" id="company_name" name="company_name" 
+                                   value="<?php echo htmlspecialchars($settings['company_name'] ?? 'NEO Printing and Advertising'); ?>" required>
                         </div>
                         
-                        <div class="form-preview">
-                            <p><strong>Preview:</strong> +<?php echo htmlspecialchars($whatsapp_number); ?></p>
-                            <p class="preview-note">This number will appear on all "Request via WhatsApp" buttons on the services page.</p>
+                        <div class="form-group">
+                            <label for="contact_email">Email Address</label>
+                            <input type="email" id="contact_email" name="contact_email" 
+                                   value="<?php echo htmlspecialchars($settings['contact_email'] ?? ''); ?>" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_phone">Phone Number</label>
+                            <input type="text" id="contact_phone" name="contact_phone" 
+                                   value="<?php echo htmlspecialchars($settings['contact_phone'] ?? ''); ?>" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact_address">Address</label>
+                            <textarea id="contact_address" name="contact_address" rows="3" required><?php echo htmlspecialchars($settings['contact_address'] ?? ''); ?></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="whatsapp_number">WhatsApp Number (numbers only, e.g., 251911234567)</label>
+                            <input type="text" id="whatsapp_number" name="whatsapp_number" 
+                                   value="<?php echo htmlspecialchars($settings['whatsapp_number'] ?? ''); ?>" 
+                                   pattern="[0-9]{10,15}" required>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Settings
+                            <i class="fas fa-save"></i> Save Contact Settings
                         </button>
                     </form>
                 </div>
                 
                 <div class="settings-card">
-                    <h2><i class="fas fa-info-circle"></i> Instructions</h2>
-                    <div class="instructions">
-                        <h3>How to get your WhatsApp Business number:</h3>
-                        <ol>
-                            <li>Use your business WhatsApp number</li>
-                            <li>Include the country code (e.g., 251 for Ethiopia)</li>
-                            <li>Remove all spaces, dashes, and the + sign</li>
-                            <li>Enter only numbers (10-15 digits)</li>
-                        </ol>
+                    <h2><i class="fas fa-lock"></i> Change Password</h2>
+                    <form method="POST" action="/admin/settings<?php echo $sessionParam; ?>" class="settings-form">
+                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
+                        <input type="hidden" name="action" value="change_password">
                         
-                        <h3>Examples:</h3>
-                        <ul>
-                            <li>+251 911 234 567 → <strong>251911234567</strong></li>
-                            <li>+1 (555) 123-4567 → <strong>15551234567</strong></li>
-                            <li>+44 20 1234 5678 → <strong>442012345678</strong></li>
-                        </ul>
-                    </div>
+                        <div class="form-group">
+                            <label for="current_password">Current Password</label>
+                            <input type="password" id="current_password" name="current_password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new_password">New Password</label>
+                            <input type="password" id="new_password" name="new_password" required minlength="6">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm New Password</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-key"></i> Change Password
+                        </button>
+                    </form>
                 </div>
             </div>
         </main>
