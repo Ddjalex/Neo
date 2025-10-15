@@ -24,6 +24,12 @@
                 <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
+                <a href="/admin/blog<?php echo $sessionParam; ?>" class="nav-item">
+                    <i class="fas fa-blog"></i> Blog
+                </a>
+                <a href="/admin/about<?php echo $sessionParam; ?>" class="nav-item">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
                 <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>

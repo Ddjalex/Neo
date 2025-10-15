@@ -14,6 +14,13 @@ class PublicController {
         $services = $serviceModel->getAll();
         $categories = $serviceModel->getCategories();
         
+        $blogModel = new BlogPost();
+        $recent_posts = array_slice($blogModel->getAll('published'), 0, 3);
+        
+        $settingsModel = new SiteSettings();
+        $about_title = $settingsModel->get('about_title') ?: 'About Us';
+        $about_content = $settingsModel->get('about_content') ?: '';
+        
         require __DIR__ . '/../views/public/home.php';
     }
     
@@ -40,6 +47,11 @@ class PublicController {
     public function contact() {
         $message = '';
         $message_type = '';
+        
+        $settingsModel = new SiteSettings();
+        $contact_email = $settingsModel->get('contact_email') ?: 'info@neoprinting.com';
+        $contact_phone = $settingsModel->get('contact_phone') ?: '+251 911 234 567';
+        $contact_address = $settingsModel->get('contact_address') ?: 'Addis Ababa, Ethiopia';
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = htmlspecialchars(trim($_POST['name'] ?? ''));

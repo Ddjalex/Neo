@@ -77,21 +77,21 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>
-                            <p>info@neoprinting.com</p>
+                            <p><?php echo htmlspecialchars($contact_email); ?></p>
                         </div>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
                         <div>
                             <h4>Phone</h4>
-                            <p>+1 (555) 123-4567</p>
+                            <p><?php echo htmlspecialchars($contact_phone); ?></p>
                         </div>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Location</h4>
-                            <p>Your City, State</p>
+                            <p><?php echo htmlspecialchars($contact_address); ?></p>
                         </div>
                     </div>
                 </div>

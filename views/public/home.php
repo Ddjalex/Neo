@@ -75,6 +75,48 @@
         </div>
     </section>
 
+    <?php if (!empty($about_content)): ?>
+    <section class="about-preview">
+        <div class="container">
+            <h2 class="section-title"><?php echo htmlspecialchars($about_title); ?></h2>
+            <p class="about-text"><?php echo htmlspecialchars(substr($about_content, 0, 300)) . (strlen($about_content) > 300 ? '...' : ''); ?></p>
+            <a href="/about" class="btn btn-secondary">Learn More About Us</a>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <?php if (!empty($recent_posts)): ?>
+    <section class="blog-preview">
+        <div class="container">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="blog-preview-grid">
+                <?php foreach ($recent_posts as $post): ?>
+                <article class="blog-preview-card">
+                    <?php if ($post['featured_image']): ?>
+                    <div class="blog-preview-image">
+                        <img src="<?php echo htmlspecialchars($post['featured_image']); ?>" 
+                             alt="<?php echo htmlspecialchars($post['title']); ?>">
+                    </div>
+                    <?php endif; ?>
+                    <div class="blog-preview-content">
+                        <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+                        <p class="blog-preview-excerpt">
+                            <?php echo htmlspecialchars($post['excerpt'] ?: substr(strip_tags($post['content']), 0, 100) . '...'); ?>
+                        </p>
+                        <a href="/blog/<?php echo htmlspecialchars($post['slug']); ?>" class="read-more">
+                            Read More <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="/blog" class="btn btn-secondary">View All Posts</a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <section class="cta-section">
         <div class="container">
             <h2>Ready to Elevate Your Brand?</h2>
