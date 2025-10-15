@@ -18,9 +18,10 @@ class AmharicMatrixRain {
             'ዘ', 'ዠ', 'የ', 'ደ', 'ጀ', 'ገ', 'ጠ', 'ጨ', 'ጰ', 'ፀ'
         ];
         
-        this.fontSize = 18;
+        this.fontSize = 24; // Increased for more spacing
         this.speed = 0.4; // Slower falling speed (was 1, now 0.4)
-        this.columns = this.canvas.width / this.fontSize;
+        this.columnSpacing = 35; // More space between columns
+        this.columns = this.canvas.width / this.columnSpacing;
         this.drops = [];
         
         for (let i = 0; i < this.columns; i++) {
@@ -33,7 +34,7 @@ class AmharicMatrixRain {
             const parent = this.canvas.parentElement;
             this.canvas.width = parent.offsetWidth;
             this.canvas.height = parent.offsetHeight;
-            this.columns = this.canvas.width / this.fontSize;
+            this.columns = this.canvas.width / this.columnSpacing;
             this.drops = [];
             for (let i = 0; i < this.columns; i++) {
                 this.drops[i] = Math.random() * -100;
@@ -50,7 +51,7 @@ class AmharicMatrixRain {
         
         for (let i = 0; i < this.drops.length; i++) {
             const text = this.amharicChars[Math.floor(Math.random() * this.amharicChars.length)];
-            this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+            this.ctx.fillText(text, i * this.columnSpacing, this.drops[i] * this.fontSize);
             
             if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
                 this.drops[i] = 0;
