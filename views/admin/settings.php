@@ -98,6 +98,43 @@
                 </div>
                 
                 <div class="settings-card">
+                    <h2><i class="fas fa-share-alt"></i> Social Media Links</h2>
+                    <form method="POST" action="/admin/settings<?php echo $sessionParam; ?>" class="settings-form">
+                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
+                        <input type="hidden" name="action" value="update_social">
+                        
+                        <div class="form-group">
+                            <label for="telegram_link"><i class="fab fa-telegram"></i> Telegram Link</label>
+                            <input type="url" id="telegram_link" name="telegram_link" 
+                                   value="<?php echo htmlspecialchars($settings['telegram_link'] ?? ''); ?>" 
+                                   placeholder="https://t.me/neoprinting">
+                            <small>Example: https://t.me/neoprinting</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="facebook_link"><i class="fab fa-facebook"></i> Facebook Link</label>
+                            <input type="url" id="facebook_link" name="facebook_link" 
+                                   value="<?php echo htmlspecialchars($settings['facebook_link'] ?? ''); ?>" 
+                                   placeholder="https://facebook.com/neoprinting">
+                            <small>Example: https://facebook.com/neoprinting</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="instagram_link"><i class="fab fa-instagram"></i> Instagram Link</label>
+                            <input type="url" id="instagram_link" name="instagram_link" 
+                                   value="<?php echo htmlspecialchars($settings['instagram_link'] ?? ''); ?>" 
+                                   placeholder="https://instagram.com/neoprinting">
+                            <small>Example: https://instagram.com/neoprinting</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Social Media Links
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="settings-card">
                     <h2><i class="fas fa-lock"></i> Change Password</h2>
                     <form method="POST" action="/admin/settings<?php echo $sessionParam; ?>" class="settings-form">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">

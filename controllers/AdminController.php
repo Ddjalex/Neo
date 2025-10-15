@@ -337,6 +337,18 @@ class AdminController {
                 } else {
                     $this->redirect('/admin/settings', 'Failed to update settings', 'error');
                 }
+            } elseif ($action === 'update_social') {
+                $updates = [
+                    'telegram_link' => trim($_POST['telegram_link'] ?? ''),
+                    'facebook_link' => trim($_POST['facebook_link'] ?? ''),
+                    'instagram_link' => trim($_POST['instagram_link'] ?? '')
+                ];
+                
+                if ($settingsModel->updateMultiple($updates)) {
+                    $this->redirect('/admin/settings', 'Social media links updated successfully!', 'success');
+                } else {
+                    $this->redirect('/admin/settings', 'Failed to update social media links', 'error');
+                }
             } elseif ($action === 'change_password') {
                 $current_password = $_POST['current_password'] ?? '';
                 $new_password = $_POST['new_password'] ?? '';
