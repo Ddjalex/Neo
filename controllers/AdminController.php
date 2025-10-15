@@ -23,12 +23,24 @@ require_once __DIR__ . '/../models/SiteSettings.php';
 
 class AdminController {
     
-    private function redirect($url) {
+    private function redirect($url, $message = '', $type = 'success') {
+        if (!empty($message)) {
+            $_SESSION['flash_message'] = $message;
+            $_SESSION['flash_type'] = $type;
+        }
         $sessionId = session_id();
         $separator = (strpos($url, '?') !== false) ? '&' : '?';
         $url = $url . $separator . 'ADMIN_SESSION=' . $sessionId;
         header('Location: ' . $url);
         exit;
+    }
+    
+    private function getFlashMessage() {
+        $message = $_SESSION['flash_message'] ?? '';
+        $type = $_SESSION['flash_type'] ?? 'success';
+        unset($_SESSION['flash_message']);
+        unset($_SESSION['flash_type']);
+        return ['message' => $message, 'type' => $type];
     }
     
     private function checkAuth() {
@@ -108,6 +120,7 @@ class AdminController {
         $services = $serviceModel->getAll();
         $categories = ['Advertising', 'Management', 'Creative', 'Tech', 'Outreach'];
         $csrf_token = $this->generateCSRFToken();
+        $flash = $this->getFlashMessage();
         
         require __DIR__ . '/../views/admin/services.php';
     }
@@ -126,7 +139,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->create($category, $title, $description, $order_position);
             
-            $this->redirect('/admin/services');
+            $this->redirect('/admin/services', 'Service added successfully!', 'success');
         }
     }
     
@@ -145,7 +158,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->update($id, $category, $title, $description, $order_position);
             
-            $this->redirect('/admin/services');
+            $this->redirect('/admin/services', 'Service updated successfully!', 'success');
         }
     }
     
@@ -160,7 +173,7 @@ class AdminController {
             $serviceModel = new Service();
             $serviceModel->delete($id);
             
-            $this->redirect('/admin/services');
+            $this->redirect('/admin/services', 'Service deleted successfully!', 'success');
         }
     }
     
@@ -170,6 +183,7 @@ class AdminController {
         $portfolioModel = new Portfolio();
         $projects = $portfolioModel->getAll();
         $csrf_token = $this->generateCSRFToken();
+        $flash = $this->getFlashMessage();
         
         require __DIR__ . '/../views/admin/portfolio.php';
     }
@@ -199,7 +213,7 @@ class AdminController {
             $portfolioModel = new Portfolio();
             $portfolioModel->create($title, $description, $image_path, $category);
             
-            $this->redirect('/admin/portfolio');
+            $this->redirect('/admin/portfolio', 'Portfolio project added successfully!', 'success');
         }
     }
     
@@ -234,7 +248,7 @@ class AdminController {
             
             $portfolioModel->update($id, $title, $description, $image_path, $category);
             
-            $this->redirect('/admin/portfolio');
+            $this->redirect('/admin/portfolio', 'Portfolio project updated successfully!', 'success');
         }
     }
     
@@ -249,7 +263,7 @@ class AdminController {
             $portfolioModel = new Portfolio();
             $portfolioModel->delete($id);
             
-            $this->redirect('/admin/portfolio');
+            $this->redirect('/admin/portfolio', 'Portfolio project deleted successfully!', 'success');
         }
     }
     
@@ -259,6 +273,7 @@ class AdminController {
         $contactModel = new ContactLead();
         $leads = $contactModel->getAll();
         $csrf_token = $this->generateCSRFToken();
+        $flash = $this->getFlashMessage();
         
         require __DIR__ . '/../views/admin/leads.php';
     }
@@ -275,7 +290,7 @@ class AdminController {
             $contactModel = new ContactLead();
             $contactModel->updateStatus($id, $status);
             
-            $this->redirect('/admin/leads');
+            $this->redirect('/admin/leads', 'Lead status updated successfully!', 'success');
         }
     }
     
@@ -290,7 +305,7 @@ class AdminController {
             $contactModel = new ContactLead();
             $contactModel->delete($id);
             
-            $this->redirect('/admin/leads');
+            $this->redirect('/admin/leads', 'Lead deleted successfully!', 'success');
         }
     }
     

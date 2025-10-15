@@ -41,6 +41,12 @@
                 <h1>Contact Leads</h1>
             </div>
             
+            <?php if (!empty($flash['message'])): ?>
+            <div class="alert alert-<?php echo $flash['type']; ?>">
+                <?php echo htmlspecialchars($flash['message']); ?>
+            </div>
+            <?php endif; ?>
+            
             <div class="admin-table-wrapper">
                 <table class="admin-table">
                     <thead>

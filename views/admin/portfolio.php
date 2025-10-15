@@ -44,6 +44,12 @@
                 </button>
             </div>
             
+            <?php if (!empty($flash['message'])): ?>
+            <div class="alert alert-<?php echo $flash['type']; ?>">
+                <?php echo htmlspecialchars($flash['message']); ?>
+            </div>
+            <?php endif; ?>
+            
             <div class="portfolio-admin-grid">
                 <?php foreach ($projects as $project): ?>
                 <div class="portfolio-admin-card">
