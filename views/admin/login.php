@@ -35,5 +35,7 @@
             <p class="login-hint">Default credentials: admin / admin123</p>
         </div>
     </div>
+    
+    <script src="/assets/js/loader.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <canvas id="matrix-canvas"></canvas>
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -60,5 +61,8 @@
             <p>&copy; <?php echo date('Y'); ?> NEO Printing and Advertising. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script src="/assets/js/matrix.js"></script>
+    <script src="/assets/js/loader.js"></script>
 </body>
 </html>
