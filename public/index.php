@@ -30,6 +30,14 @@ switch ($request_path) {
         $publicController->contact();
         break;
         
+    case '/blog':
+        $publicController->blog();
+        break;
+        
+    case '/about':
+        $publicController->about();
+        break;
+        
     case '/admin/login':
         $adminController->login();
         break;
@@ -91,8 +99,32 @@ switch ($request_path) {
         $adminController->settings();
         break;
         
+    case '/admin/blog':
+        $adminController->blog();
+        break;
+        
+    case '/admin/blog/create':
+        $adminController->blogCreate();
+        break;
+        
+    case '/admin/blog/edit':
+        $adminController->blogEdit();
+        break;
+        
+    case '/admin/blog/delete':
+        $adminController->blogDelete();
+        break;
+        
+    case '/admin/about':
+        $adminController->about();
+        break;
+        
     default:
-        http_response_code(404);
-        echo '404 - Page Not Found';
+        if (preg_match('/^\/blog\/([a-z0-9-]+)$/', $request_path, $matches)) {
+            $publicController->blogPost($matches[1]);
+        } else {
+            http_response_code(404);
+            echo '404 - Page Not Found';
+        }
         break;
 }
