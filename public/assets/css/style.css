@@ -726,16 +726,14 @@ body {
     pointer-events: none;
     mask-image: linear-gradient(to bottom, 
         rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 80px, 
-        rgba(0,0,0,0.5) 100px,
-        rgba(0,0,0,0) 120px,
+        rgba(0,0,0,1) 60px, 
+        rgba(0,0,0,0) 80px,
         rgba(0,0,0,0) 100%
     );
     -webkit-mask-image: linear-gradient(to bottom, 
         rgba(0,0,0,1) 0%, 
-        rgba(0,0,0,1) 80px, 
-        rgba(0,0,0,0.5) 100px,
-        rgba(0,0,0,0) 120px,
+        rgba(0,0,0,1) 60px, 
+        rgba(0,0,0,0) 80px,
         rgba(0,0,0,0) 100%
     );
 }
