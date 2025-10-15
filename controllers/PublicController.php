@@ -4,6 +4,8 @@ require_once __DIR__ . '/../config/settings.php';
 require_once __DIR__ . '/../models/Service.php';
 require_once __DIR__ . '/../models/Portfolio.php';
 require_once __DIR__ . '/../models/ContactLead.php';
+require_once __DIR__ . '/../models/BlogPost.php';
+require_once __DIR__ . '/../models/SiteSettings.php';
 
 class PublicController {
     
@@ -64,5 +66,33 @@ class PublicController {
         }
         
         require __DIR__ . '/../views/public/contact.php';
+    }
+    
+    public function blog() {
+        $blogModel = new BlogPost();
+        $posts = $blogModel->getAll('published');
+        
+        require __DIR__ . '/../views/public/blog.php';
+    }
+    
+    public function blogPost($slug) {
+        $blogModel = new BlogPost();
+        $post = $blogModel->getBySlug($slug);
+        
+        if (!$post) {
+            header("HTTP/1.0 404 Not Found");
+            echo "Blog post not found";
+            exit;
+        }
+        
+        require __DIR__ . '/../views/public/blog_post.php';
+    }
+    
+    public function about() {
+        $settingsModel = new SiteSettings();
+        $about_title = $settingsModel->get('about_title') ?: 'About Us';
+        $about_content = $settingsModel->get('about_content') ?: '';
+        
+        require __DIR__ . '/../views/public/about.php';
     }
 }
