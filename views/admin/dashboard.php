@@ -1,4 +1,3 @@
-<?php $sessionParam = '?ADMIN_SESSION=' . session_id(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +14,28 @@
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item active">
+                <a href="/admin/dashboard" class="nav-item active">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/services" class="nav-item">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/portfolio" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/blog<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/blog" class="nav-item">
                     <i class="fas fa-blog"></i> Blog
                 </a>
-                <a href="/admin/about<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/about" class="nav-item">
                     <i class="fas fa-info-circle"></i> About
                 </a>
-                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/leads" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/settings<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/settings" class="nav-item">
                     <i class="fas fa-cog"></i> Settings
                 </a>
-                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/logout" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>

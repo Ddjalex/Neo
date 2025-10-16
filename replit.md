@@ -86,6 +86,7 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - **Dynamic Phone Number**: WhatsApp number managed through admin settings panel
 
 ## Recent Changes
+- October 16, 2025: Fixed admin logout functionality - removed session parameter from URLs to work with cookie-only sessions
 - October 16, 2025: Enhanced session security - removed session IDs from URLs, implemented cookie-only sessions with HTTP-only and SameSite protection
 - October 16, 2025: Fixed admin login routing - added `/admin/login` route
 - October 16, 2025: Fixed service image display - added square aspect ratio styling with object-fit

@@ -19,28 +19,28 @@ $pageTitle = $isEdit ? 'Edit Post' : 'New Post';
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/dashboard" class="nav-item">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/services" class="nav-item">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/portfolio" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/blog<?php echo $sessionParam; ?>" class="nav-item active">
+                <a href="/admin/blog" class="nav-item active">
                     <i class="fas fa-blog"></i> Blog
                 </a>
-                <a href="/admin/about<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/about" class="nav-item">
                     <i class="fas fa-info-circle"></i> About
                 </a>
-                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/leads" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/settings<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/settings" class="nav-item">
                     <i class="fas fa-cog"></i> Settings
                 </a>
-                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/logout" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
@@ -49,7 +49,7 @@ $pageTitle = $isEdit ? 'Edit Post' : 'New Post';
         <main class="admin-content">
             <div class="admin-header">
                 <h1><?php echo $pageTitle; ?></h1>
-                <a href="/admin/blog<?php echo $sessionParam; ?>" class="btn btn-secondary">
+                <a href="/admin/blog" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Back to Blog
                 </a>
             </div>
@@ -96,7 +96,7 @@ $pageTitle = $isEdit ? 'Edit Post' : 'New Post';
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i> <?php echo $isEdit ? 'Update' : 'Create'; ?> Post
                     </button>
-                    <a href="/admin/blog<?php echo $sessionParam; ?>" class="btn btn-secondary">Cancel</a>
+                    <a href="/admin/blog" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </main>

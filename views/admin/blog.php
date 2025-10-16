@@ -1,4 +1,3 @@
-<?php $sessionParam = '?ADMIN_SESSION=' . session_id(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +14,28 @@
                 <img src="/assets/images/logo.png" alt="NEO Logo">
             </div>
             <nav class="sidebar-nav">
-                <a href="/admin/dashboard<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/dashboard" class="nav-item">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
-                <a href="/admin/services<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/services" class="nav-item">
                     <i class="fas fa-briefcase"></i> Services
                 </a>
-                <a href="/admin/portfolio<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/portfolio" class="nav-item">
                     <i class="fas fa-images"></i> Portfolio
                 </a>
-                <a href="/admin/blog<?php echo $sessionParam; ?>" class="nav-item active">
+                <a href="/admin/blog" class="nav-item active">
                     <i class="fas fa-blog"></i> Blog
                 </a>
-                <a href="/admin/about<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/about" class="nav-item">
                     <i class="fas fa-info-circle"></i> About
                 </a>
-                <a href="/admin/leads<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/leads" class="nav-item">
                     <i class="fas fa-envelope"></i> Leads
                 </a>
-                <a href="/admin/settings<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/settings" class="nav-item">
                     <i class="fas fa-cog"></i> Settings
                 </a>
-                <a href="/admin/logout<?php echo $sessionParam; ?>" class="nav-item">
+                <a href="/admin/logout" class="nav-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
@@ -45,7 +44,7 @@
         <main class="admin-content">
             <div class="admin-header">
                 <h1>Blog Posts</h1>
-                <a href="/admin/blog/create<?php echo $sessionParam; ?>" class="btn btn-primary">
+                <a href="/admin/blog/create" class="btn btn-primary">
                     <i class="fas fa-plus"></i> New Post
                 </a>
             </div>
@@ -84,10 +83,10 @@
                             </td>
                             <td><?php echo $post['published_at'] ? date('M d, Y', strtotime($post['published_at'])) : 'Not published'; ?></td>
                             <td class="actions">
-                                <a href="/admin/blog/edit<?php echo $sessionParam; ?>&id=<?php echo $post['id']; ?>" class="btn-icon btn-edit" title="Edit">
+                                <a href="/admin/blog/edit&id=<?php echo $post['id']; ?>" class="btn-icon btn-edit" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form method="POST" action="/admin/blog/delete<?php echo $sessionParam; ?>" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                <form method="POST" action="/admin/blog/delete" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                     <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                                     <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
