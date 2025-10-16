@@ -53,6 +53,9 @@ class PublicController {
         });
         $related_services = array_slice($related_services, 0, 3);
         
+        $settingsModel = new SiteSettings();
+        $contact_email = $settingsModel->get('contact_email') ?: 'info@neoprinting.com';
+        
         require __DIR__ . '/../views/public/service_detail.php';
     }
     

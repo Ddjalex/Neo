@@ -53,7 +53,8 @@
                            rel="noopener noreferrer">
                             <i class="fab fa-whatsapp"></i> Request via WhatsApp
                         </a>
-                        <a href="/contact" class="btn btn-secondary">
+                        <a href="mailto:<?php echo htmlspecialchars($contact_email); ?>?subject=Inquiry about <?php echo urlencode($service['title']); ?>" 
+                           class="btn btn-secondary">
                             <i class="fas fa-envelope"></i> Contact Us
                         </a>
                     </div>
