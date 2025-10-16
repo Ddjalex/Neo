@@ -574,7 +574,7 @@ body {
 }
 
 .sidebar-brand {
-    padding: 1.5rem;
+    padding: 1rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -583,12 +583,12 @@ body {
 }
 
 .sidebar-nav {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 .nav-item {
     display: block;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     color: var(--white);
     text-decoration: none;
     transition: background 0.3s;
