@@ -53,7 +53,7 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - `site_settings`: Configurable site settings (contact info, social media links, etc.)
 
 ## Admin Access
-- **URL**: `/admin/login`
+- **URL**: `/admin`
 - **Username**: admin
 - **Password**: admin123
 

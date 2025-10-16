@@ -46,7 +46,7 @@ class AdminController {
     
     private function checkAuth() {
         if (!isset($_SESSION['admin_id'])) {
-            $this->redirect('/admin/login');
+            $this->redirect('/admin');
         }
     }
     
@@ -135,7 +135,7 @@ class AdminController {
     
     public function logout() {
         session_destroy();
-        $this->redirect('/admin/login');
+        $this->redirect('/admin');
     }
     
     public function dashboard() {

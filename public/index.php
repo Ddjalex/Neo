@@ -38,7 +38,7 @@ switch ($request_path) {
         $publicController->about();
         break;
         
-    case '/admin/login':
+    case '/admin':
         $adminController->login();
         break;
         
@@ -46,7 +46,6 @@ switch ($request_path) {
         $adminController->logout();
         break;
         
-    case '/admin':
     case '/admin/dashboard':
         $adminController->dashboard();
         break;
