@@ -126,6 +126,7 @@ class PublicController {
         $settingsModel = new SiteSettings();
         $about_title = $settingsModel->get('about_title') ?: 'About Us';
         $about_content = $settingsModel->get('about_content') ?: '';
+        $about_image = $settingsModel->get('about_image') ?: '';
         
         require __DIR__ . '/../views/public/about.php';
     }

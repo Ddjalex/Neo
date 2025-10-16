@@ -520,6 +520,7 @@ class AdminController {
         $settingsModel = new SiteSettings();
         $about_title = $settingsModel->get('about_title') ?: 'About Us';
         $about_content = $settingsModel->get('about_content') ?: '';
+        $about_image = $settingsModel->get('about_image') ?: '';
         $csrf_token = $this->generateCSRFToken();
         $flash = $this->getFlashMessage();
         
@@ -528,9 +529,29 @@ class AdminController {
             
             $title = $_POST['about_title'] ?? '';
             $content = $_POST['about_content'] ?? '';
+            $image_path = $about_image;
+            
+            if (isset($_FILES['about_image']) && $_FILES['about_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = __DIR__ . '/../public/assets/uploads/about/';
+                if (!is_dir($upload_dir)) {
+                    mkdir($upload_dir, 0755, true);
+                }
+                
+                $file_extension = pathinfo($_FILES['about_image']['name'], PATHINFO_EXTENSION);
+                $file_name = uniqid() . '.' . $file_extension;
+                $upload_path = $upload_dir . $file_name;
+                
+                if (move_uploaded_file($_FILES['about_image']['tmp_name'], $upload_path)) {
+                    if ($about_image && file_exists(__DIR__ . '/../public' . $about_image)) {
+                        unlink(__DIR__ . '/../public' . $about_image);
+                    }
+                    $image_path = '/assets/uploads/about/' . $file_name;
+                }
+            }
             
             $settingsModel->set('about_title', $title);
             $settingsModel->set('about_content', $content);
+            $settingsModel->set('about_image', $image_path);
             
             $this->redirect('/admin/about', 'About page updated successfully!', 'success');
         }

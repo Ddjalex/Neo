@@ -54,7 +54,7 @@
             <?php endif; ?>
             
             <div class="about-editor">
-                <form method="POST" action="/admin/about<?php echo $sessionParam; ?>" class="admin-form">
+                <form method="POST" action="/admin/about<?php echo $sessionParam; ?>" class="admin-form" enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                     <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                     
@@ -62,6 +62,17 @@
                         <label for="about_title">Page Title</label>
                         <input type="text" id="about_title" name="about_title" 
                                value="<?php echo htmlspecialchars($about_title); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="about_image">About Page Image</label>
+                        <?php if ($about_image): ?>
+                        <div class="current-image">
+                            <img src="<?php echo htmlspecialchars($about_image); ?>" alt="Current about image" style="max-width: 300px; margin-bottom: 10px; border-radius: 5px;">
+                        </div>
+                        <?php endif; ?>
+                        <input type="file" id="about_image" name="about_image" accept="image/*">
+                        <small>Upload an image to display on the About page (JPG, PNG, or GIF)</small>
                     </div>
                     
                     <div class="form-group">
@@ -74,8 +85,8 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Save About Page
                         </button>
-                        <a href="/" target="_blank" class="btn btn-secondary">
-                            <i class="fas fa-eye"></i> Preview Website
+                        <a href="/about" target="_blank" class="btn btn-secondary">
+                            <i class="fas fa-eye"></i> Preview About Page
                         </a>
                     </div>
                 </form>

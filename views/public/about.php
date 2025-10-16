@@ -35,6 +35,11 @@
 
     <section class="about-content-section">
         <div class="container">
+            <?php if ($about_image): ?>
+            <div class="about-image-wrapper">
+                <img src="<?php echo htmlspecialchars($about_image); ?>" alt="<?php echo htmlspecialchars($about_title); ?>" class="about-image">
+            </div>
+            <?php endif; ?>
             <div class="about-content">
                 <?php echo nl2br(htmlspecialchars($about_content)); ?>
             </div>
