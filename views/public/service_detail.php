@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - NEO Printing and Advertising</title>
+    <title><?php echo htmlspecialchars($service['title']); ?> - NEO Printing and Advertising</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
@@ -30,47 +30,71 @@
     <section class="page-header">
         <canvas id="matrix-canvas"></canvas>
         <div class="container">
-            <h1>Our Services</h1>
-            <p>Comprehensive digital marketing and technology solutions for your business</p>
+            <h1><?php echo htmlspecialchars($service['title']); ?></h1>
+            <p><?php echo htmlspecialchars($service['category']); ?> Service</p>
         </div>
     </section>
 
-    <section class="services-detail">
+    <section class="service-detail-content">
         <div class="container">
-            <?php foreach ($grouped_services as $category => $category_services): ?>
-            <div class="service-category">
-                <h2 class="category-title"><?php echo htmlspecialchars($category); ?></h2>
-                <div class="service-list">
-                    <?php foreach ($category_services as $service): ?>
-                    <div class="service-item">
-                        <h3>
-                            <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>">
-                                <?php echo htmlspecialchars($service['title']); ?>
-                            </a>
-                        </h3>
-                        <p><?php echo htmlspecialchars($service['description']); ?></p>
-                        <div class="service-item-actions">
-                            <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>" class="btn btn-primary">Learn More</a>
-                            <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
-                               class="whatsapp-btn" 
-                               target="_blank" 
-                               rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp"></i> Request via WhatsApp
-                            </a>
-                        </div>
+            <div class="service-detail-wrapper">
+                <div class="service-info">
+                    <div class="service-category-badge">
+                        <i class="fas fa-tag"></i> <?php echo htmlspecialchars($service['category']); ?>
                     </div>
-                    <?php endforeach; ?>
+                    
+                    <h2>About This Service</h2>
+                    <p class="service-description"><?php echo nl2br(htmlspecialchars($service['description'])); ?></p>
+                    
+                    <div class="service-actions">
+                        <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
+                           class="btn btn-whatsapp" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> Request via WhatsApp
+                        </a>
+                        <a href="/contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Contact Us
+                        </a>
+                    </div>
+                    
+                    <div class="service-back">
+                        <a href="/services" class="back-link">
+                            <i class="fas fa-arrow-left"></i> Back to All Services
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="related-services">
+                    <h3>Related Services</h3>
+                    <div class="related-services-list">
+                        <?php foreach ($related_services as $related): ?>
+                        <a href="/services/<?php echo htmlspecialchars($related['slug']); ?>" class="related-service-card">
+                            <div class="related-service-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="related-service-info">
+                                <h4><?php echo htmlspecialchars($related['title']); ?></h4>
+                                <p><?php echo htmlspecialchars($related['category']); ?></p>
+                            </div>
+                        </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-            <?php endforeach; ?>
         </div>
     </section>
 
     <section class="cta-section">
         <div class="container">
-            <h2>Interested in Our Services?</h2>
-            <p>Get in touch to discuss how we can help your business grow</p>
-            <a href="/contact" class="btn btn-primary">Contact Us</a>
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us today to discuss your <?php echo htmlspecialchars($service['title']); ?> needs</p>
+            <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
+               class="btn btn-primary" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
         </div>
     </section>
 

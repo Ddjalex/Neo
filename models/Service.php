@@ -23,6 +23,12 @@ class Service {
         return $stmt->fetch();
     }
     
+    public function getBySlug($slug) {
+        $stmt = $this->db->prepare("SELECT * FROM services WHERE slug = ?");
+        $stmt->execute([$slug]);
+        return $stmt->fetch();
+    }
+    
     public function create($category, $title, $description, $order_position = 0) {
         $stmt = $this->db->prepare("INSERT INTO services (category, title, description, order_position) VALUES (?, ?, ?, ?)");
         return $stmt->execute([$category, $title, $description, $order_position]);

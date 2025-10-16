@@ -122,6 +122,8 @@ switch ($request_path) {
     default:
         if (preg_match('/^\/blog\/([a-z0-9-]+)$/', $request_path, $matches)) {
             $publicController->blogPost($matches[1]);
+        } elseif (preg_match('/^\/services\/([a-z0-9-]+)$/', $request_path, $matches)) {
+            $publicController->serviceDetail($matches[1]);
         } else {
             http_response_code(404);
             echo '404 - Page Not Found';

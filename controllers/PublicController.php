@@ -37,6 +37,25 @@ class PublicController {
         require __DIR__ . '/../views/public/services.php';
     }
     
+    public function serviceDetail($slug) {
+        $serviceModel = new Service();
+        $service = $serviceModel->getBySlug($slug);
+        
+        if (!$service) {
+            header("HTTP/1.0 404 Not Found");
+            echo "Service not found";
+            exit;
+        }
+        
+        $related_services = $serviceModel->getByCategory($service['category']);
+        $related_services = array_filter($related_services, function($s) use ($service) {
+            return $s['id'] != $service['id'];
+        });
+        $related_services = array_slice($related_services, 0, 3);
+        
+        require __DIR__ . '/../views/public/service_detail.php';
+    }
+    
     public function portfolio() {
         $portfolioModel = new Portfolio();
         $projects = $portfolioModel->getAll();
