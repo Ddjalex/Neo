@@ -93,7 +93,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('addServiceModal')">&times;</span>
             <h2>Add New Service</h2>
-            <form method="POST" action="/admin/services/create<?php echo $sessionParam; ?>">
+            <form method="POST" action="/admin/services/create<?php echo $sessionParam; ?>" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <div class="form-group">
@@ -113,6 +113,10 @@
                     <textarea name="description" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
+                    <label>Service Image</label>
+                    <input type="file" name="service_image" accept="image/*">
+                </div>
+                <div class="form-group">
                     <label>Order Position</label>
                     <input type="number" name="order_position" value="0">
                 </div>
@@ -125,10 +129,11 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('editServiceModal')">&times;</span>
             <h2>Edit Service</h2>
-            <form method="POST" action="/admin/services/update<?php echo $sessionParam; ?>" id="editServiceForm">
+            <form method="POST" action="/admin/services/update<?php echo $sessionParam; ?>" id="editServiceForm" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                 <input type="hidden" name="ADMIN_SESSION" value="<?php echo session_id(); ?>">
                 <input type="hidden" name="id" id="edit_id">
+                <input type="hidden" name="current_image" id="edit_current_image">
                 <div class="form-group">
                     <label>Category</label>
                     <select name="category" id="edit_category" required>
@@ -144,6 +149,12 @@
                 <div class="form-group">
                     <label>Description</label>
                     <textarea name="description" id="edit_description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Service Image</label>
+                    <div id="edit_current_image_preview" style="margin-bottom: 10px;"></div>
+                    <input type="file" name="service_image" accept="image/*">
+                    <small>Leave empty to keep current image</small>
                 </div>
                 <div class="form-group">
                     <label>Order Position</label>

@@ -66,6 +66,46 @@ class AdminController {
         }
     }
     
+    private function uploadServiceImage($file) {
+        if (!is_uploaded_file($file['tmp_name'])) {
+            return ['error' => 'Invalid file upload.'];
+        }
+        
+        $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $max_file_size = 5 * 1024 * 1024; // 5MB
+        
+        $file_mime = mime_content_type($file['tmp_name']);
+        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $file_size = $file['size'];
+        
+        if (!in_array($file_mime, $allowed_types)) {
+            return ['error' => 'Invalid file type. Only images are allowed.'];
+        }
+        
+        if (!in_array($file_extension, $allowed_extensions)) {
+            return ['error' => 'Invalid file extension. Only jpg, jpeg, png, gif, webp are allowed.'];
+        }
+        
+        if ($file_size > $max_file_size) {
+            return ['error' => 'File size exceeds 5MB limit.'];
+        }
+        
+        $upload_dir = __DIR__ . '/../public/uploads/services/';
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0755, true);
+        }
+        
+        $file_name = uniqid('service_', true) . '.' . $file_extension;
+        $upload_path = $upload_dir . $file_name;
+        
+        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+            return ['success' => true, 'path' => '/uploads/services/' . $file_name];
+        }
+        
+        return ['error' => 'Failed to upload image. Please try again.'];
+    }
+    
     public function login() {
         if (isset($_SESSION['admin_id'])) {
             $this->redirect('/admin/dashboard');
@@ -137,8 +177,20 @@ class AdminController {
             $description = $_POST['description'] ?? '';
             $order_position = intval($_POST['order_position'] ?? 0);
             
+            $image_path = null;
+            if (isset($_FILES['service_image']) && $_FILES['service_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_result = $this->uploadServiceImage($_FILES['service_image']);
+                
+                if (isset($upload_result['error'])) {
+                    $this->redirect('/admin/services', $upload_result['error'], 'error');
+                    return;
+                }
+                
+                $image_path = $upload_result['path'];
+            }
+            
             $serviceModel = new Service();
-            $serviceModel->create($category, $title, $description, $order_position);
+            $serviceModel->create($category, $title, $description, $order_position, $image_path);
             
             $this->redirect('/admin/services', 'Service added successfully!', 'success');
         }
@@ -156,8 +208,20 @@ class AdminController {
             $description = $_POST['description'] ?? '';
             $order_position = intval($_POST['order_position'] ?? 0);
             
+            $image_path = null;
+            if (isset($_FILES['service_image']) && $_FILES['service_image']['error'] === UPLOAD_ERR_OK) {
+                $upload_result = $this->uploadServiceImage($_FILES['service_image']);
+                
+                if (isset($upload_result['error'])) {
+                    $this->redirect('/admin/services', $upload_result['error'], 'error');
+                    return;
+                }
+                
+                $image_path = $upload_result['path'];
+            }
+            
             $serviceModel = new Service();
-            $serviceModel->update($id, $category, $title, $description, $order_position);
+            $serviceModel->update($id, $category, $title, $description, $order_position, $image_path);
             
             $this->redirect('/admin/services', 'Service updated successfully!', 'success');
         }

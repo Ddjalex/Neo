@@ -29,14 +29,22 @@ class Service {
         return $stmt->fetch();
     }
     
-    public function create($category, $title, $description, $order_position = 0) {
-        $stmt = $this->db->prepare("INSERT INTO services (category, title, description, order_position) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$category, $title, $description, $order_position]);
+    public function create($category, $title, $description, $order_position = 0, $image_path = null) {
+        $slug = $this->generateSlug($title);
+        $stmt = $this->db->prepare("INSERT INTO services (category, title, slug, description, order_position, image_path) VALUES (?, ?, ?, ?, ?, ?)");
+        return $stmt->execute([$category, $title, $slug, $description, $order_position, $image_path]);
     }
     
-    public function update($id, $category, $title, $description, $order_position) {
-        $stmt = $this->db->prepare("UPDATE services SET category = ?, title = ?, description = ?, order_position = ? WHERE id = ?");
-        return $stmt->execute([$category, $title, $description, $order_position, $id]);
+    public function update($id, $category, $title, $description, $order_position, $image_path = null) {
+        $slug = $this->generateSlug($title, $id);
+        
+        if ($image_path !== null) {
+            $stmt = $this->db->prepare("UPDATE services SET category = ?, title = ?, slug = ?, description = ?, order_position = ?, image_path = ? WHERE id = ?");
+            return $stmt->execute([$category, $title, $slug, $description, $order_position, $image_path, $id]);
+        } else {
+            $stmt = $this->db->prepare("UPDATE services SET category = ?, title = ?, slug = ?, description = ?, order_position = ? WHERE id = ?");
+            return $stmt->execute([$category, $title, $slug, $description, $order_position, $id]);
+        }
     }
     
     public function delete($id) {
@@ -47,5 +55,33 @@ class Service {
     public function getCategories() {
         $stmt = $this->db->query("SELECT DISTINCT category FROM services ORDER BY category ASC");
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+    
+    public function generateSlug($title, $excludeId = null) {
+        $slug = strtolower(trim($title));
+        $slug = preg_replace('/[^a-z0-9-]/', '-', $slug);
+        $slug = preg_replace('/-+/', '-', $slug);
+        $slug = trim($slug, '-');
+        
+        $originalSlug = $slug;
+        $counter = 1;
+        
+        while ($this->slugExists($slug, $excludeId)) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+        
+        return $slug;
+    }
+    
+    private function slugExists($slug, $excludeId = null) {
+        if ($excludeId !== null) {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM services WHERE slug = ? AND id != ?");
+            $stmt->execute([$slug, $excludeId]);
+        } else {
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM services WHERE slug = ?");
+            $stmt->execute([$slug]);
+        }
+        return $stmt->fetchColumn() > 0;
     }
 }

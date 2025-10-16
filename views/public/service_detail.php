@@ -58,6 +58,12 @@
         <div class="container">
             <div class="service-detail-wrapper">
                 <div class="service-info">
+                    <?php if (!empty($service['image_path'])): ?>
+                    <div class="service-detail-image">
+                        <img src="<?php echo htmlspecialchars($service['image_path']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>">
+                    </div>
+                    <?php endif; ?>
+                    
                     <div class="service-category-badge">
                         <i class="fas fa-tag"></i> <?php echo htmlspecialchars($service['category']); ?>
                     </div>

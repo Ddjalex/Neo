@@ -18,6 +18,15 @@ function editService(service) {
     document.getElementById('edit_title').value = service.title;
     document.getElementById('edit_description').value = service.description;
     document.getElementById('edit_order_position').value = service.order_position;
+    document.getElementById('edit_current_image').value = service.image_path || '';
+    
+    const previewDiv = document.getElementById('edit_current_image_preview');
+    if (service.image_path) {
+        previewDiv.innerHTML = '<img src="' + service.image_path + '" alt="Current service image" style="max-width: 200px; max-height: 150px; border-radius: 4px;">';
+    } else {
+        previewDiv.innerHTML = '<p style="color: #666;">No image uploaded</p>';
+    }
+    
     openModal('editServiceModal');
 }
 

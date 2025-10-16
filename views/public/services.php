@@ -43,14 +43,21 @@
                 <div class="service-list">
                     <?php foreach ($category_services as $service): ?>
                     <div class="service-item">
-                        <h3>
-                            <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>">
-                                <?php echo htmlspecialchars($service['title']); ?>
-                            </a>
-                        </h3>
-                        <p><?php echo htmlspecialchars($service['description']); ?></p>
-                        <div class="service-item-actions">
-                            <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>" class="btn btn-primary">Learn More</a>
+                        <?php if (!empty($service['image_path'])): ?>
+                        <div class="service-image">
+                            <img src="<?php echo htmlspecialchars($service['image_path']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>">
+                        </div>
+                        <?php endif; ?>
+                        <div class="service-content">
+                            <h3>
+                                <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>">
+                                    <?php echo htmlspecialchars($service['title']); ?>
+                                </a>
+                            </h3>
+                            <p><?php echo htmlspecialchars($service['description']); ?></p>
+                            <div class="service-item-actions">
+                                <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>" class="btn btn-primary">Learn More</a>
+                            </div>
                         </div>
                     </div>
                     <?php endforeach; ?>
