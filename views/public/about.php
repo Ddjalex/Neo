@@ -65,14 +65,6 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Work With Us?</h2>
-            <p>Let's create something amazing together</p>
-            <a href="/contact" class="btn btn-primary">Contact Us Today</a>
-        </div>
-    </section>
-
     <footer class="footer">
         <canvas id="footer-matrix-canvas"></canvas>
         <div class="container">

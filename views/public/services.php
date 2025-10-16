@@ -60,14 +60,6 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Interested in Our Services?</h2>
-            <p>Get in touch to discuss how we can help your business grow</p>
-            <a href="/contact" class="btn btn-primary">Contact Us</a>
-        </div>
-    </section>
-
     <footer class="footer">
         <canvas id="footer-matrix-canvas"></canvas>
         <div class="container">

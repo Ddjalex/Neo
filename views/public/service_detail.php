@@ -105,19 +105,6 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Get Started?</h2>
-            <p>Contact us today to discuss your <?php echo htmlspecialchars($service['title']); ?> needs</p>
-            <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
-               class="btn btn-primary" 
-               target="_blank" 
-               rel="noopener noreferrer">
-                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-        </div>
-    </section>
-
     <footer class="footer">
         <canvas id="footer-matrix-canvas"></canvas>
         <div class="container">
