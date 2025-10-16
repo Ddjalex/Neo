@@ -14,8 +14,10 @@ CREATE TABLE IF NOT EXISTS services (
     id SERIAL PRIMARY KEY,
     category VARCHAR(100) NOT NULL,
     title VARCHAR(200) NOT NULL,
+    slug VARCHAR(300) UNIQUE,
     description TEXT,
     order_position INTEGER DEFAULT 0,
+    image_path VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -47,19 +49,19 @@ VALUES ('admin', '$2y$10$RIu8YvzC2nP/gmTfJWTmw.2bZCMhGMdvuTGxh3xvcADzNBBcHGmVW')
 ON CONFLICT (username) DO NOTHING;
 
 -- Insert sample services
-INSERT INTO services (category, title, description, order_position) VALUES
-('Advertising', 'Digital Marketing', 'Comprehensive digital marketing solutions to boost your online presence', 1),
-('Advertising', 'Print Advertising', 'High-quality print materials for all your advertising needs', 2),
-('Advertising', 'Outdoor Advertising', 'Eye-catching billboards and outdoor displays', 3),
-('Management', 'Brand Management', 'Strategic brand development and management services', 1),
-('Management', 'Campaign Management', 'End-to-end marketing campaign planning and execution', 2),
-('Creative', 'Graphic Design', 'Professional graphic design services for all media', 1),
-('Creative', 'Content Creation', 'Engaging content creation for digital and print platforms', 2),
-('Creative', 'Video Production', 'Professional video production and editing services', 3),
-('Technology', 'Web Development', 'Custom website design and development', 1),
-('Technology', 'Digital Solutions', 'Innovative digital technology solutions', 2),
-('Outreach', 'Social Media Marketing', 'Strategic social media campaigns and management', 1),
-('Outreach', 'Email Marketing', 'Targeted email marketing campaigns', 2)
+INSERT INTO services (category, title, slug, description, order_position) VALUES
+('Advertising', 'Digital Marketing', 'digital-marketing', 'Comprehensive digital marketing solutions to boost your online presence', 1),
+('Advertising', 'Print Advertising', 'print-advertising', 'High-quality print materials for all your advertising needs', 2),
+('Advertising', 'Outdoor Advertising', 'outdoor-advertising', 'Eye-catching billboards and outdoor displays', 3),
+('Management', 'Brand Management', 'brand-management', 'Strategic brand development and management services', 1),
+('Management', 'Campaign Management', 'campaign-management', 'End-to-end marketing campaign planning and execution', 2),
+('Creative', 'Graphic Design', 'graphic-design', 'Professional graphic design services for all media', 1),
+('Creative', 'Content Creation', 'content-creation', 'Engaging content creation for digital and print platforms', 2),
+('Creative', 'Video Production', 'video-production', 'Professional video production and editing services', 3),
+('Technology', 'Web Development', 'web-development', 'Custom website design and development', 1),
+('Technology', 'Digital Solutions', 'digital-solutions', 'Innovative digital technology solutions', 2),
+('Outreach', 'Social Media Marketing', 'social-media-marketing', 'Strategic social media campaigns and management', 1),
+('Outreach', 'Email Marketing', 'email-marketing', 'Targeted email marketing campaigns', 2)
 ON CONFLICT DO NOTHING;
 
 -- Insert sample portfolio projects

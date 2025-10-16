@@ -39,6 +39,7 @@ switch ($request_path) {
         break;
         
     case '/admin':
+    case '/admin/login':
         $adminController->login();
         break;
         
