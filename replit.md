@@ -86,6 +86,7 @@ Professional corporate website for NEO Printing and Advertising built with Pure 
 - **Dynamic Phone Number**: WhatsApp number managed through admin settings panel
 
 ## Recent Changes
+- October 16, 2025: Enhanced session security - removed session IDs from URLs, implemented cookie-only sessions with HTTP-only and SameSite protection
 - October 16, 2025: Fixed admin login routing - added `/admin/login` route
 - October 16, 2025: Fixed service image display - added square aspect ratio styling with object-fit
 - October 16, 2025: Updated database schema - added `slug` and `image_path` columns to services table
@@ -111,7 +112,8 @@ The website runs on PHP's built-in server on port 5000. The workflow "NEO Websit
 - Password hashing with bcrypt
 - Prepared statements for SQL injection prevention
 - Session-based authentication with regeneration after login
-- Secure session cookies (httponly, secure, SameSite=Strict)
+- Secure cookie-only sessions (no session IDs in URLs)
+- HTTP-only cookies with SameSite=Lax protection
 - CSRF token protection on all admin forms
 - Input sanitization with htmlspecialchars
 - File upload validation
