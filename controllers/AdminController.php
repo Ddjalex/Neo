@@ -1,17 +1,12 @@
 <?php
-// Configure session to work in iframe/proxy environments
+// Configure secure session handling with cookies only
 ini_set('session.use_cookies', '1');
-ini_set('session.use_only_cookies', '0');
-ini_set('session.use_trans_sid', '1');
-ini_set('session.cookie_samesite', '');
+ini_set('session.use_only_cookies', '1');
+ini_set('session.use_trans_sid', '0');
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_samesite', 'Lax');
+
 session_name('ADMIN_SESSION');
-
-if (isset($_GET['ADMIN_SESSION']) && !empty($_GET['ADMIN_SESSION'])) {
-    session_id($_GET['ADMIN_SESSION']);
-} elseif (isset($_POST['ADMIN_SESSION']) && !empty($_POST['ADMIN_SESSION'])) {
-    session_id($_POST['ADMIN_SESSION']);
-}
-
 session_start();
 
 require_once __DIR__ . '/../config/database.php';
@@ -29,9 +24,6 @@ class AdminController {
             $_SESSION['flash_message'] = $message;
             $_SESSION['flash_type'] = $type;
         }
-        $sessionId = session_id();
-        $separator = (strpos($url, '?') !== false) ? '&' : '?';
-        $url = $url . $separator . 'ADMIN_SESSION=' . $sessionId;
         header('Location: ' . $url);
         exit;
     }
