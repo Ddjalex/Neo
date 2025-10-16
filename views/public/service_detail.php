@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($service['title']); ?> - NEO Printing and Advertising</title>
+    
+    <meta name="description" content="<?php echo Settings::createMetaDescription($service['description']); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($service['title']); ?>, <?php echo htmlspecialchars($service['category']); ?>, NEO Printing, Advertising Ethiopia, Digital Marketing, Printing Services">
+    <meta name="author" content="NEO Printing and Advertising">
+    
+    <meta property="og:title" content="<?php echo htmlspecialchars($service['title']); ?> - NEO Printing and Advertising">
+    <meta property="og:description" content="<?php echo Settings::createMetaDescription($service['description']); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo Settings::getBaseUrl(); ?>/services/<?php echo htmlspecialchars($service['slug']); ?>">
+    <meta property="og:site_name" content="NEO Printing and Advertising">
+    <meta property="og:image" content="<?php echo Settings::getBaseUrl() . Settings::getDefaultOGImage(); ?>">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($service['title']); ?> - NEO Printing and Advertising">
+    <meta name="twitter:description" content="<?php echo Settings::createMetaDescription($service['description']); ?>">
+    <meta name="twitter:image" content="<?php echo Settings::getBaseUrl() . Settings::getDefaultOGImage(); ?>">
+    
+    <link rel="canonical" href="<?php echo Settings::getBaseUrl(); ?>/services/<?php echo htmlspecialchars($service['slug']); ?>">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">

@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($about_title); ?> - NEO Printing and Advertising</title>
+    
+    <meta name="description" content="<?php echo Settings::createMetaDescription($about_content); ?>">
+    <meta name="keywords" content="About NEO Printing, NEO Advertising Ethiopia, Digital Marketing Company, Printing Services Ethiopia, About Us, Company Profile">
+    <meta name="author" content="NEO Printing and Advertising">
+    
+    <meta property="og:title" content="<?php echo htmlspecialchars($about_title); ?> - NEO Printing and Advertising">
+    <meta property="og:description" content="<?php echo Settings::createMetaDescription($about_content); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo Settings::getBaseUrl(); ?>/about">
+    <meta property="og:site_name" content="NEO Printing and Advertising">
+    <meta property="og:image" content="<?php echo Settings::getBaseUrl() . ($about_image ? htmlspecialchars($about_image) : Settings::getDefaultOGImage()); ?>">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($about_title); ?> - NEO Printing and Advertising">
+    <meta name="twitter:description" content="<?php echo Settings::createMetaDescription($about_content); ?>">
+    <meta name="twitter:image" content="<?php echo Settings::getBaseUrl() . ($about_image ? htmlspecialchars($about_image) : Settings::getDefaultOGImage()); ?>">
+    
+    <link rel="canonical" href="<?php echo Settings::getBaseUrl(); ?>/about">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">

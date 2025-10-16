@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post['title']); ?> - NEO Printing and Advertising</title>
+    
+    <meta name="description" content="<?php echo Settings::createMetaDescription($post['content']); ?>">
+    <meta name="keywords" content="<?php echo htmlspecialchars($post['title']); ?>, NEO Printing, Advertising Blog, <?php echo htmlspecialchars($post['author']); ?>, Digital Marketing Ethiopia, Printing News">
+    <meta name="author" content="<?php echo htmlspecialchars($post['author']); ?>">
+    
+    <meta property="og:title" content="<?php echo htmlspecialchars($post['title']); ?>">
+    <meta property="og:description" content="<?php echo Settings::createMetaDescription($post['content']); ?>">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<?php echo Settings::getBaseUrl(); ?>/blog/<?php echo htmlspecialchars($post['slug']); ?>">
+    <meta property="og:site_name" content="NEO Printing and Advertising">
+    <meta property="og:image" content="<?php echo Settings::getBaseUrl() . ($post['featured_image'] ? htmlspecialchars($post['featured_image']) : Settings::getDefaultOGImage()); ?>">
+    <meta property="article:published_time" content="<?php echo date('c', strtotime($post['published_at'])); ?>">
+    <meta property="article:author" content="<?php echo htmlspecialchars($post['author']); ?>">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($post['title']); ?>">
+    <meta name="twitter:description" content="<?php echo Settings::createMetaDescription($post['content']); ?>">
+    <meta name="twitter:image" content="<?php echo Settings::getBaseUrl() . ($post['featured_image'] ? htmlspecialchars($post['featured_image']) : Settings::getDefaultOGImage()); ?>">
+    
+    <link rel="canonical" href="<?php echo Settings::getBaseUrl(); ?>/blog/<?php echo htmlspecialchars($post['slug']); ?>">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
