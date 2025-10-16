@@ -1189,7 +1189,7 @@ body {
 }
 
 .btn-whatsapp {
-    background: #00E676;
+    background: #4A5F7C;
     color: var(--white);
     padding: 12px 30px;
     border-radius: 5px;
@@ -1201,7 +1201,7 @@ body {
 }
 
 .btn-whatsapp:hover {
-    background: #00C853;
+    background: #3A4F6C;
     transform: translateY(-2px);
 }
 

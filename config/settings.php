@@ -124,7 +124,7 @@ class Settings {
         // Add service link
         if (!empty($service_name)) {
             $serviceSlug = strtolower(str_replace(' ', '-', $service_name));
-            $message .= "Service link: " . $websiteUrl . "/services#" . $serviceSlug;
+            $message .= "Service link: " . $websiteUrl . "/services/" . $serviceSlug;
         } else {
             $message .= "Website: " . $websiteUrl;
         }
