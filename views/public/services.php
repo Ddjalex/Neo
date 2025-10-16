@@ -51,12 +51,6 @@
                         <p><?php echo htmlspecialchars($service['description']); ?></p>
                         <div class="service-item-actions">
                             <a href="/services/<?php echo htmlspecialchars($service['slug']); ?>" class="btn btn-primary">Learn More</a>
-                            <a href="<?php echo Settings::getWhatsAppLink($service['title']); ?>" 
-                               class="whatsapp-btn" 
-                               target="_blank" 
-                               rel="noopener noreferrer">
-                                <i class="fab fa-whatsapp"></i> Request via WhatsApp
-                            </a>
                         </div>
                     </div>
                     <?php endforeach; ?>
