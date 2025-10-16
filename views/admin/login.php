@@ -18,10 +18,7 @@
             </div>
             <?php endif; ?>
             
-            <form method="POST" action="/admin/login<?php echo isset($_GET['ADMIN_SESSION']) ? '?ADMIN_SESSION=' . htmlspecialchars($_GET['ADMIN_SESSION']) : ''; ?>">
-                <?php if (isset($_GET['ADMIN_SESSION'])): ?>
-                <input type="hidden" name="ADMIN_SESSION" value="<?php echo htmlspecialchars($_GET['ADMIN_SESSION']); ?>">
-                <?php endif; ?>
+            <form method="POST" action="/admin/login">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required autofocus>
@@ -34,8 +31,6 @@
                 
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
-            
-            <p class="login-hint">Default credentials: admin / admin123</p>
         </div>
     </div>
     
